@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Avion.cpp"
+#include "jet.hpp"
 
 void JetPrive::setNombreSalon(int _nombreSalon){
     if (_nombreSalon < 0){
