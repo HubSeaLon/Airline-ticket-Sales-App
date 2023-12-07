@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include "avion.hpp"
+#include "jet.hpp"
+#include "avionDeLigne.hpp"
 
 // DEF AVION // 
 
@@ -83,16 +85,15 @@ double Avion::getDistanceMax() const{
     return distanceMax;
 }
 
-void Avion::setDateService(std::string _dateService){
-    if (_dateService.length() > 10  ){
-                std::cerr << "dateService incorrecte" << std::endl;
-                dateService = "date inconnue";
-              }else{
-                dateService = _dateService;
-              }
+void Avion::setDateService(int jour, int mois, int annee){
+    dateService.tm_mday = jour;
+    dateService.tm_mon = mois - 1;
+    dateService.tm_year = annee - 1900;
 }
 std::string Avion:: getDateService() const{
-    return dateService;
+    char buffer[80];
+    std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &dateService);
+    return std::string(buffer);
 }
 
 void Avion::setPays(std::string _pays){
@@ -106,17 +107,6 @@ void Avion::setPays(std::string _pays){
 
 std::string Avion::getPays() const{
     return pays;
-}
-
-void Avion::displayInfoAvion() const{
-    std::cout << "Nom modele : " << getNomModele() << std::endl;
-    std::cout << "Capacite : " << getCapacite() << std::endl;
-    std::cout << "Vitesse moy : " << getVitesseMoy() << std::endl;
-    std::cout << "Altitude moy: " << getAltitudeMoy() << std::endl;
-    std::cout << "Poids : " << getPoids() << std::endl;
-    std::cout << "Distance max : " << getDistanceMax() << std::endl;
-    std::cout << "Date service : " << getDateService() << std::endl;
-    std::cout << "Pays : " << getPays() << std::endl;
 }
 
 
@@ -162,10 +152,18 @@ int AvionDeLigne::getPlaceFirstClasse() const{
     return placeFirstClasse;
 }
 
-void AvionDeLigne::displayInfoLigne() const{
-    std::cout << "Nombre place Business : " << getPlaceBusiness() << std::endl;
-    std::cout << "Nombre place Economie : " << getPlaceEconomie() << std::endl;
-    std::cout << "Nombre place Premiere classe : " << getPlaceFirstClasse() << std::endl;
+void AvionDeLigne::displayInfoAvion() const{
+    std::cout << "Nom modele : " << nomModele << std::endl;
+    std::cout << "Capacite : " << capacite << std::endl;
+    std::cout << "Nombre place Business : " << placeBusiness << std::endl;
+    std::cout << "Nombre place Economie : " << placeEconomie << std::endl;
+    std::cout << "Nombre place Premiere classe : " << placeFirstClasse << std::endl;
+    std::cout << "Vitesse moy : " << vitesseMoy << std::endl;
+    std::cout << "Altitude moy: " << altitudeMoy << std::endl;
+    std::cout << "Poids : " << poids << std::endl;
+    std::cout << "Distance max : " << distanceMax << std::endl;
+    std::cout << "Date service : " << getDateService() << std::endl;
+    std::cout << "Pays : " << pays << std::endl;
     std::cout << "\n";
     std::cout << "\n";
 }
@@ -209,10 +207,18 @@ int JetPrive::getNombreJacuzzi() const{
     return nombreJacuzzi;
 }
 
-void JetPrive::displayInfoJet() const{
-    std::cout << "Nombre salon : " << getNombreSalon() << std::endl;
-    std::cout << "Nombre bar : " << getNombreBar() << std::endl;
-    std::cout << "Nombre jacuzzi : " << getNombreJacuzzi() << std::endl;
+void JetPrive::displayInfoAvion() const{
+    std::cout << "Nom modele : " << nomModele << std::endl;
+    std::cout << "Capacite : " << capacite << std::endl;
+    std::cout << "Nombre salon : " << nombreSalon << std::endl;
+    std::cout << "Nombre bar : " << nombreBar << std::endl;
+    std::cout << "Nombre jacuzzi : " << nombreJacuzzi << std::endl;
+    std::cout << "Vitesse moy : " << vitesseMoy << std::endl;
+    std::cout << "Altitude moy: " << altitudeMoy << std::endl;
+    std::cout << "Poids : " << poids << std::endl;
+    std::cout << "Distance max : " << distanceMax << std::endl;
+    std::cout << "Date service : " << getDateService() << std::endl;
+    std::cout << "Pays : " << pays << std::endl;
     std::cout << "\n";
     std::cout << "\n";
 }
@@ -224,32 +230,26 @@ int main(int argc, char const *argv[])
     std::cout << "Liste des avions de lignes : \n";
     std::cout << "\n";
 
-    AvionDeLigne Avion1("Boeing 737", 150, 900, 11000, 350, 5000, "01/01/2023", "France", 20, 100, 30);
+    AvionDeLigne Avion1("Boeing 737", 150, 900, 11000, 350, 5000, 1,1,2023, "France", 20, 100, 30);
     Avion1.displayInfoAvion();
-    Avion1.displayInfoLigne();
 
-    AvionDeLigne Avion2("Boeing 430", 200, 1000, 12000, 400, 7000, "05/04/2020", "France", 20, 150, 30);
+    AvionDeLigne Avion2("Boeing 430", 200, 1000, 12000, 400, 7000, 5,4,2022, "France", 20, 150, 30);
     Avion2.displayInfoAvion();
-    Avion2.displayInfoLigne();
 
-    AvionDeLigne Avion3("Boeing A380", 500, 900, 10670, 560, 15200, "25/10/2007", "France", 150, 250, 100);
+    AvionDeLigne Avion3("Boeing A380", 500, 900, 10670, 560, 15200, 25,10,2007, "France", 150, 250, 100);
     Avion3.displayInfoAvion();
-    Avion3.displayInfoLigne();
 
     std::cout << "Liste des jets prives : \n";
     std::cout << "\n";
 
-    JetPrive Jet1("Gulfstream G650", 19, 956, 15545, 24.5, 12964, "01/01/2012", "Etats-Unis",1,1,1);
+    JetPrive Jet1("Gulfstream G650", 19, 956, 15545, 24.5, 12964, 01,01,2012, "Etats-Unis",1,1,1);
     Jet1.displayInfoAvion();
-    Jet1.displayInfoJet();
 
-    JetPrive Jet2("Bombardier Global 7500", 19, 930, 15545, 24.5, 14264, "01/01/2018", "Canada",1,2,1);
+    JetPrive Jet2("Bombardier Global 7500", 19, 930, 15545, 24.5, 14264, 01,01,2018, "Canada",1,2,1);
     Jet2.displayInfoAvion();
-    Jet2.displayInfoJet();
 
-    JetPrive Jet3("Dassault Falcon 8X", 14, 900, 15545, 19.3, 11945, "01/01/2016", "France",1,1,2);
+    JetPrive Jet3("Dassault Falcon 8X", 14, 900, 15545, 19.3, 11945, 01,01,2016, "France",1,1,2);
     Jet3.displayInfoAvion();
-    Jet3.displayInfoJet();
 
     return 0;
 }
