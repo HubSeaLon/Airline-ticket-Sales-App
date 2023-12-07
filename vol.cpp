@@ -25,10 +25,10 @@ int Vol::getIdVol() const{
     return idVol;
 }
 
-void Vol::setDateDepart(int annee, int mois, int jour){
+void Vol::setDateDepart(int jour, int mois, int annee){
     dateDepart.tm_mday = jour;
     dateDepart.tm_mon = mois - 1;
-    dateDepart.tm_year = annee - 1900;  
+    dateDepart.tm_year = annee - 1900;
 }
 std::string Vol::getDateDepart() const{
     char buffer[80];
@@ -36,7 +36,7 @@ std::string Vol::getDateDepart() const{
     return std::string(buffer);
 }
 
-void Vol::setDateArrivee(int annee, int mois, int jour){
+void Vol::setDateArrivee(int jour, int mois, int annee){
     dateArrivee.tm_mday = jour;
     dateArrivee.tm_mon = mois - 1;
     dateArrivee.tm_year = annee - 1900; 

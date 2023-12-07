@@ -2,19 +2,20 @@
 #define DEF_CLIENT
 
 #include <string>
+#include <ctime>
 
 class Client{
     private:
         int numeroClient;
         std::string nom;
         std::string prenom;
-        std::string dateNaissance;
+        tm dateNaissance;
         std::string adresse;
-        int numeroTel;
+        std::string numeroTel;
         std::string mail;
 
     public:
-        Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _date, std::string _adresse, int _numeroTel, std::string _mail);
+        Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail);
 
         void setNumeroClient(int _numeroClient);
         int getNumeroClient() const;
@@ -25,14 +26,14 @@ class Client{
         void setPrenom(std::string _prenom);
         std::string getPrenom() const;
 
-        void setDateNaissance(std::string _date);
+        void setDateNaissance(int jourNaissance, int moisNaissance, int anneeNaissance);
         std::string getDateNaissance() const;
 
         void setAdresse(std::string _adresse);
         std::string getAdresse() const;
 
-        void setNumeroTel(int _numeroTel);
-        int getNumeroTel() const;
+        void setNumeroTel(std::string _numeroTel);
+        std::string getNumeroTel() const;
 
         void setMail(std::string _mail);
         std::string getMail() const;

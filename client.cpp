@@ -1,14 +1,17 @@
 #include <iostream>
 #include "client.hpp"
 
-Client::Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _date, std::string _adresse, int _numeroTel, std::string _mail){
+Client::Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
     numeroClient = _numeroClient;
     nom = _nom;
     prenom = _prenom;
-    dateNaissance = _date;
     adresse = _adresse;
     numeroTel = _numeroTel;
     mail = _mail;
+
+    dateNaissance.tm_mday = jourNaissance;
+    dateNaissance.tm_mon = moisNaissance - 1;
+    dateNaissance.tm_year = anneeNaissance - 1900;
 }
 
 void Client::setNumeroClient(int _numeroClient){
@@ -32,11 +35,15 @@ std::string Client::getPrenom() const{
     return prenom;
 }
 
-void Client::setDateNaissance(std::string _date){
-    dateNaissance = _date;
+void Client::setDateNaissance(int jourNaissance, int moisNaissance, int anneeNaissance){
+    dateNaissance.tm_mday = jourNaissance;
+    dateNaissance.tm_mon = moisNaissance - 1;
+    dateNaissance.tm_year = anneeNaissance - 1900;
 }
 std::string Client::getDateNaissance() const{
-    return dateNaissance;
+    char buffer[80];
+    std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &dateNaissance);
+    return std::string(buffer);
 }
 
 void Client::setAdresse(std::string _adresse){
@@ -46,10 +53,10 @@ std::string Client::getAdresse() const{
     return adresse;
 }
 
-void Client::setNumeroTel(int _numeroTel){
+void Client::setNumeroTel(std::string _numeroTel){
     numeroTel = _numeroTel;
 }
-int Client::getNumeroTel() const{
+std::string Client::getNumeroTel() const{
     return numeroTel;
 }
 
