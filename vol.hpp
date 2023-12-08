@@ -3,6 +3,9 @@
 
 #include <string>
 #include <ctime>
+#include "client.hpp"
+#include <vector>
+#include <algorithm>
 
 class Vol{
     private:
@@ -15,6 +18,7 @@ class Vol{
         double prix;
         int terminalDepart;
         int terminalArrivee;
+        std::vector <Client> clients;
 
     public:
         Vol(int _idVol, int jourDepart, int moisDepart, int anneeDepart,int jourArrivee, int moisArrivee, int anneeArrivee, std::string _aeroportDepart, std::string _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee);
@@ -44,7 +48,10 @@ class Vol{
         int getTerminalDepart() const;
 
         void setTerminalArrivee(int _terminalArrivee);
-        int getTerminalArrivee() const;   
+        int getTerminalArrivee() const;  
+
+        void addClient(Client _client);
+        void removeClient(Client _client);
 
         void displayInfoVol() const;
 };

@@ -39,5 +39,11 @@ class Client{
         std::string getMail() const;
 
         void displayInfoClient() const;
+
+        void affiche() const;
+
+        bool estEgale(Client _client);
 };
+bool operator==(Client client1,Client client2);
+
 #endif

@@ -25,10 +25,10 @@ int Vol::getIdVol() const{
     return idVol;
 }
 
-void Vol::setDateDepart(int jour, int mois, int annee){
+void Vol::setDateDepart(int annee, int mois, int jour){
     dateDepart.tm_mday = jour;
     dateDepart.tm_mon = mois - 1;
-    dateDepart.tm_year = annee - 1900;
+    dateDepart.tm_year = annee - 1900;  
 }
 std::string Vol::getDateDepart() const{
     char buffer[80];
@@ -36,7 +36,7 @@ std::string Vol::getDateDepart() const{
     return std::string(buffer);
 }
 
-void Vol::setDateArrivee(int jour, int mois, int annee){
+void Vol::setDateArrivee(int annee, int mois, int jour){
     dateArrivee.tm_mday = jour;
     dateArrivee.tm_mon = mois - 1;
     dateArrivee.tm_year = annee - 1900; 
@@ -90,6 +90,15 @@ int Vol::getTerminalArrivee() const{
     return terminalArrivee;
 }
 
+void Vol::addClient(Client _client){
+    clients.push_back(_client);
+}
+
+void Vol::removeClient(Client _client){
+    clients.erase(std::remove(clients.begin(), clients.end(), _client), clients.end());
+    std::cout<<"suppression effective"<<std::endl;
+}
+
 void Vol::displayInfoVol() const{
     std::cout<<"ID du vol: "<<getIdVol()<<std::endl;
     std::cout<<"Date de depart: "<<getDateDepart()<<std::endl;
@@ -100,4 +109,8 @@ void Vol::displayInfoVol() const{
     std::cout<<"Prix: "<<getPrix()<<std::endl;
     std::cout<<"Terminal de depart: "<<getTerminalDepart()<<std::endl;
     std::cout<<"Terminal d'arrivee: "<<getTerminalArrivee()<<std::endl;
+    std::cout<<"Liste des clients sur le vol: "<<std::endl;
+    for (const auto& client: clients){
+        client.affiche();
+    }
 }

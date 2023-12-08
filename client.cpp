@@ -76,3 +76,15 @@ void Client::displayInfoClient() const{
     std::cout<<"Numero de telephone: "<<getNumeroTel()<<std::endl;
     std::cout<<"Mail: "<<getMail()<<std::endl;
 }
+
+void Client::affiche() const{
+    std::cout<<getNom()<<" "<<getPrenom()<<std::endl;
+}
+
+bool Client::estEgale(Client _client){
+    return (numeroClient == _client.getNumeroClient());
+}
+
+bool operator==(Client client1, Client client2){
+    return client1.estEgale(client2);
+}
