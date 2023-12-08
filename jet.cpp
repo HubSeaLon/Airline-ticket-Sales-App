@@ -40,17 +40,19 @@ int JetPrive::getNombreJacuzzi() const{
 }
 
 void JetPrive::displayInfoAvion() const{
-    std::cout << "Nom modele : " << nomModele << std::endl;
-    std::cout << "Capacite : " << capacite << std::endl;
-    std::cout << "Nombre salon : " << nombreSalon << std::endl;
-    std::cout << "Nombre bar : " << nombreBar << std::endl;
+    std::cout << "-------------------------------------------------\n";
+    std::cout << "Nom modele     : " << nomModele << std::endl;
+    std::cout << "Capacite       : " << capacite << std::endl;
+    std::cout << "Nombre salon   : " << nombreSalon << std::endl;
+    std::cout << "Nombre bar     : " << nombreBar << std::endl;
     std::cout << "Nombre jacuzzi : " << nombreJacuzzi << std::endl;
-    std::cout << "Vitesse moy : " << vitesseMoy << std::endl;
-    std::cout << "Altitude moy: " << altitudeMoy << std::endl;
-    std::cout << "Poids : " << poids << std::endl;
-    std::cout << "Distance max : " << distanceMax << std::endl;
-    std::cout << "Date service : " << getDateService() << std::endl;
-    std::cout << "Pays : " << pays << std::endl;
+    std::cout << "Vitesse moy    : " << vitesseMoy << std::endl;
+    std::cout << "Altitude moy   : " << altitudeMoy << std::endl;
+    std::cout << "Poids          : " << poids << std::endl;
+    std::cout << "Distance max   : " << distanceMax << std::endl;
+    std::cout << "Date service   : " << getDateService() << std::endl;
+    std::cout << "Pays           : " << pays << std::endl;
+    std::cout << "-------------------------------------------------\n";
     std::cout << "\n";
     std::cout << "\n";
 }
