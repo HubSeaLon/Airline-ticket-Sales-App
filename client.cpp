@@ -1,8 +1,8 @@
 #include <iostream>
 #include "client.hpp"
 
-Client::Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
-    numeroClient = _numeroClient;
+Client::Client(std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
+    numeroClient = ++dernierNumClient;
     nom = _nom;
     prenom = _prenom;
     adresse = _adresse;
@@ -14,9 +14,16 @@ Client::Client(int _numeroClient, std::string _nom, std::string _prenom, int jou
     dateNaissance.tm_year = anneeNaissance - 1900;
 }
 
+int Client::dernierNumClient = 0;
+
+Client::~Client(){
+    std::cout<<"destruction du client "<< nom <<std::endl; 
+}
+/*
 void Client::setNumeroClient(int _numeroClient){
     numeroClient = _numeroClient;
 }
+*/
 int Client::getNumeroClient() const{
     return numeroClient;
 }

@@ -7,6 +7,7 @@
 class Client{
     private:
         int numeroClient;
+        static int dernierNumClient;
         std::string nom;
         std::string prenom;
         tm dateNaissance;
@@ -15,9 +16,11 @@ class Client{
         std::string mail;
 
     public:
-        Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail);
+        Client(std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail);
 
-        void setNumeroClient(int _numeroClient);
+        ~Client();
+
+        //void setNumeroClient(int _numeroClient);
         int getNumeroClient() const;
 
         void setNom(std::string _nom);
