@@ -8,7 +8,6 @@
 
 
 
-
 class AvionDeLigne : public Avion {
 private:
     int placeBusiness;
@@ -18,9 +17,9 @@ private:
 public:
     AvionDeLigne(std::string _nomModele, int _capacite, double _vitesseMoy, 
                  double _altitudeMoy, double _poids, double _distanceMax,
-                 int jour, int mois, int annee, std::string _pays, 
+                 int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie, 
                  int _placeBusiness, int _placeEconomie, int _placeFirstClasse) 
-        : Avion(_nomModele, _capacite, _vitesseMoy, _altitudeMoy, _poids, _distanceMax, jour, mois, annee, _pays),
+        : Avion(_nomModele, _capacite, _vitesseMoy, _altitudeMoy, _poids, _distanceMax, jour, mois, annee, _pays, _compagnie),
           placeBusiness(_placeBusiness), placeEconomie(_placeEconomie), placeFirstClasse(_placeFirstClasse) {
 
             if (_placeBusiness < 0){

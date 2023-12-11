@@ -18,9 +18,9 @@ class JetPrive : public Avion {
 
     JetPrive(std::string _nomModele, int _capacite, double _vitesseMoy, 
                  double _altitudeMoy, double _poids, double _distanceMax,
-                 int jour, int mois, int annee, std::string _pays,
+                 int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie,
                  int _nombreSalon, int _nombreBar, int _nombreJacuzzi)   
-        : Avion(_nomModele, _capacite, _vitesseMoy, _altitudeMoy, _poids, _distanceMax, jour, mois, annee, _pays),
+        : Avion(_nomModele, _capacite, _vitesseMoy, _altitudeMoy, _poids, _distanceMax, jour, mois, annee, _pays, _compagnie),
           nombreSalon(_nombreSalon), nombreBar(_nombreBar), nombreJacuzzi(_nombreJacuzzi) {
 
             if (_nombreSalon < 0){

@@ -4,9 +4,12 @@
 #include <vector>
 #include <iostream>
 #include <ctime>
+#include "compagnie.hpp"
+
 
 
 class Avion {
+
 protected:
     std::string nomModele; 
     int capacite;
@@ -16,14 +19,17 @@ protected:
     double distanceMax;
     tm dateService;
     std::string pays;
+    Compagnie* compagnie;
+
+
 
 public:
     Avion(std::string _nomModele, int _capacite, double _vitesseMoy, 
           double _altitudeMoy, double _poids, double _distanceMax,
-          int jour, int mois, int annee, std::string _pays)
+          int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie)
         : nomModele(_nomModele), capacite(_capacite), vitesseMoy(_vitesseMoy),
           altitudeMoy(_altitudeMoy), poids(_poids), distanceMax(_distanceMax),
-          pays(_pays) {
+          pays(_pays), compagnie(_compagnie) {
 
         dateService.tm_mday = jour;
         dateService.tm_mon = mois - 1;

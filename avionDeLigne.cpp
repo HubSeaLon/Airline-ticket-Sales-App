@@ -49,12 +49,13 @@ void AvionDeLigne::displayInfoAvion() const{
     std::cout << "Nbre place Business    : " << placeBusiness << std::endl;
     std::cout << "Nbre place Economie    : " << placeEconomie << std::endl;
     std::cout << "Nbre place 1ere classe : " << placeFirstClasse << std::endl;
-    std::cout << "Vitesse moy            : " << vitesseMoy << std::endl;
-    std::cout << "Altitude moy           : " << altitudeMoy << std::endl;
-    std::cout << "Poids                  : " << poids << std::endl;
-    std::cout << "Distance max           : " << distanceMax << std::endl;
+    std::cout << "Vitesse moy (km/h)     : " << vitesseMoy << std::endl;
+    std::cout << "Altitude moy (m)       : " << altitudeMoy << std::endl;
+    std::cout << "Poids (t)              : " << poids << std::endl;
+    std::cout << "Distance max (km)      : " << distanceMax << std::endl;
     std::cout << "Date service           : " << getDateService() << std::endl;
     std::cout << "Pays                   : " << pays << std::endl;
+    std::cout << "Compagnie aerienne     : " << compagnie->getNom() << std::endl;
     std::cout << "-------------------------------------------------\n";
     std::cout << "\n";
     std::cout << "\n";
