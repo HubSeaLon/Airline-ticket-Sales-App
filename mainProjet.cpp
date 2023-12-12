@@ -42,6 +42,126 @@ void createAccount() {
     std::cout << "Compte cree avec succes." << std::endl;
 }
 
+
+// Fonction pour afficher rubrique informations 
+
+void rubriqueInfo() {
+    int choice;
+    int quitterRubrique;
+    do {
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "--------------------------------------------------\n";
+        std::cout << "--------------RUBRIQUE INFORMATIONS---------------\n";
+        std::cout << "\n";
+        std::cout << "Choisissez une option : \n";
+        std::cout << "1. Consulter les differentes compagnies aeriennes \n";
+        std::cout << "2. Consulter les differents aeroports \n";
+        std::cout << "3. Consulter les differents avions et leurs caracteristiques \n";
+        std::cout << "0. Retour menu \n";
+        std::cout << "--------------------------------------------------"; 
+        
+        std::cin >> choice;
+
+
+        switch (choice) {
+            case 1:
+                std::cout << "\n";
+                std::cout << "\n";
+                std::cout << "--------------------------------------------------\n";
+                std::cout << "-----------LISTE COMPAGNIES AERIENNES-------------\n";
+                std::cout << "\n";
+                //AirFrance.displayInfoCompagnie();
+                //DeltaAirLines.displayInfoCompagnie();
+                //Emirates.displayInfoCompagnie();
+                //Lufthansa.displayInfoCompagnie();
+                //CQatarAirways.displayInfoCompagnie();
+
+                std::cout << "0. Pour quitter \n";
+                std::cin >> quitterRubrique;
+
+                if (quitterRubrique == 0) {
+                    std::cout << "Retour au menu principal \n";
+                    return;
+                } else {
+                    while (quitterRubrique != 0) {
+                        std::cout << "Veuillez entrer 0 pour quitter \n";
+                        std::cin >> quitterRubrique;    
+                    }
+                }
+                break;
+
+            case 2:
+                std::cout << "\n";
+                std::cout << "\n";
+                std::cout << "--------------------------------------------------\n";
+                std::cout << "-----------------LISTE AEROPORTS------------------\n";
+                std::cout << "\n";
+                //aeroportDeParis.displayInfoAeroport();
+                //aeroportDeLondre.displayInfoAeroport();
+                //aeroportDeBerlin.displayInfoAeroport();
+
+                std::cout << "0. Pour quitter \n";
+                std::cin >> quitterRubrique;
+
+                if (quitterRubrique == 0) {
+                    std::cout << "Retour au menu principal \n";
+                    return;
+                } else {
+                    while (quitterRubrique != 0) {
+                        std::cout << "Veuillez entrer 0 pour quitter \n";
+                        std::cin >> quitterRubrique;    
+                    }
+                }
+                break;
+
+
+            case 3:
+                std::cout << "\n";
+                std::cout << "\n";
+                std::cout << "--------------------------------------------------\n";
+                std::cout << "------------------LISTES AVIONS-------------------\n";
+                std::cout << "\n";
+
+                std::cout << "LISTE AVIONS DE LIGNES : \n";
+
+                // Avion1.displayInfoAvion();
+                // Avion2.displayInfoAvion();
+                // Avion3.displayInfoAvion();
+                // Avion4.displayInfoAvion();
+                // Avion5.displayInfoAvion();
+
+                std::cout << "LISTE JET PRIVES : \n";
+
+                // Jet1.displayInfoAvion();
+                // Jet2.displayInfoAvion();
+                // Jet3.displayInfoAvion();
+                // Jet4.displayInfoAvion();
+                // Jet5.displayInfoAvion();
+
+                std::cout << "0. Pour quitter \n";
+                std::cin >> quitterRubrique;
+
+                if (quitterRubrique == 0) {
+                    std::cout << "Retour au menu principal \n";
+                    return;
+                } else {
+                    while (quitterRubrique != 0) {
+                        std::cout << "Veuillez entrer 0 pour quitter \n";
+                        std::cin >> quitterRubrique;    
+                    }
+                }
+          
+                break;
+            case 0:
+                std::cout << "Retour au menu principal.\n";
+                return;
+            default:
+                std::cerr << "Option invalide. Veuillez ressayez. \n";
+        }
+    } while (true);
+}
+
 // Fonction pour se connecter
 void login() {
     std::string username, password;
@@ -76,7 +196,8 @@ void login() {
             std::cout << "Choisissez une option :" << std::endl;
             std::cout << "1. Consulter des vols" << std::endl;
             std::cout << "2. Consulter votre compte" << std::endl;
-            std::cout << "3. Se deconnecter" << std::endl;
+            std::cout << "3. Afficher rubrique informations" << std::endl;
+            std::cout << "4. Se deconnecter" << std::endl;
 
             std::cin >> choice;
 
@@ -88,6 +209,9 @@ void login() {
                     std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
                     break;
                 case 3:
+                    rubriqueInfo();
+                    break;
+                case 4:
                     std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
                     break;
                 default:
