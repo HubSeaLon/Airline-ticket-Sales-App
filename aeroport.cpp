@@ -1,7 +1,5 @@
 #include "Aeroport.hpp"
 
-// Constructeur par défaut
-Aeroport::Aeroport() : nombreTerminal(0) {}
 
 // Méthodes de modification des attributs
 void Aeroport::setNom(const std::string& newNom) {
