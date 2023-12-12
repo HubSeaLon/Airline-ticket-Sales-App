@@ -8,9 +8,11 @@ class Billet{
         int numeroBillet;
         std::string typeClasse;
         int siegePassager;
+        Vol* vol;
+        Client* client;
     
     public:
-        Billet(int _numeroBillet, std::string _typeClasse, int _siegePassager);
+        Billet(int _numeroBillet, std::string _typeClasse, int _siegePassager, Vol* _vol, Client* _client);
 
         void setNumeroBillet(int _numeroBillet);
         int getNumeroBillet() const;

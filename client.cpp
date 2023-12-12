@@ -77,6 +77,6 @@ void Client::displayInfoClient() const{
     std::cout<<"Mail: "<<getMail()<<std::endl;
 }
 
-void Client::affiche() const{
-    std::cout<<getNom()<<" "<<getPrenom()<<std::endl;
+std::string Client::affiche() const{
+    std::cout<<"Client: "<<getNom()<<" "<<getPrenom()<<std::endl;
 }

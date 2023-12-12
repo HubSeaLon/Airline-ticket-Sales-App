@@ -40,6 +40,6 @@ class Client{
 
         void displayInfoClient() const;
 
-        void affiche() const;
+        std::string affiche() const;
 };
 #endif

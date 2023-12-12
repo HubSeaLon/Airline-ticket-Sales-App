@@ -6,7 +6,8 @@ const std::string ACCOUNTS_FILE = "accounts.txt";
 
 // Fonction pour créer un compte
 void createAccount() {
-    std::string username, password;
+    std::string username, password, nom, prenom, adresse, numeroTel, mail;
+    int jourN, moisN, anneeN, ID;
 
     std::cout << "Entrez votre nom d'utilisateur : ";
     std::cin >> username;
@@ -14,12 +15,38 @@ void createAccount() {
     std::cout << "Entrez votre mot de passe : ";
     std::cin >> password;
 
+    std::cout << "Entrez votre nom: ";
+    std::cin >> nom;
+
+    std::cout << "Entrez votre prenom: ";
+    std::cin >> prenom;
+
+    std::cout << "Entrez votre jour de naissance: ";
+    std::cin >> jourN;
+
+    std::cout << "Entrez votre mois de naissance: ";
+    std::cin >> moisN;
+
+    std::cout << "Entrez votre annee de naissance: ";
+    std::cin >> anneeN;
+
+    std::cout << "Entrez votre adresse: ";
+    std::cin >> adresse;
+
+    std::cout << "Entrez votre numero de telephone: ";
+    std::cin >> numeroTel;
+
+    std::cout << "Entrez votre mail: ";
+    std::cin >> mail;
+
     // Charger les comptes existants depuis le fichier texte
     std::ifstream accountsFileIn(ACCOUNTS_FILE);
     std::string line;
     bool usernameExists = false;
+    int lineCount = 0;
 
     while (std::getline(accountsFileIn, line)) {
+        ++lineCount;
         if (line.find(username) != std::string::npos) {
             usernameExists = true;
             break;
@@ -33,11 +60,15 @@ void createAccount() {
         std::cerr << "Erreur : Le nom d'utilisateur existe déjà." << std::endl;
         return;
     }
+    
+    ID = lineCount + 1;
 
     // Ajouter le nouveau compte
     std::ofstream accountsFileOut(ACCOUNTS_FILE, std::ios::app);
-    accountsFileOut << username << " " << password << std::endl;
+    accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << jourN << " " << moisN << " " << anneeN << " " << adresse << " " << numeroTel << " " << mail <<std::endl;
     accountsFileOut.close();
+
+    //ici?  Client client(ID,nom,prenom,jourN,moisN,anneeN,adresse,numeroTel,mail);
 
     std::cout << "Compte cree avec succes." << std::endl;
 }
