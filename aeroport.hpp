@@ -12,7 +12,8 @@ private:
 
 public:
     // Constructeur
-    Aeroport();
+    Aeroport(std::string _nom, std::string _adresse, int _nombreTerminal) : nom(_nom), adresse(_adresse), nombreTerminal(_nombreTerminal){
+    }
 
     // Méthodes de modification des attributs
     void setNom(const std::string& newNom);
