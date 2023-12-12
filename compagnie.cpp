@@ -1,6 +1,4 @@
 #include "Compagnie.hpp"
-#include "aeroport.hpp"
-#include "aeroport.cpp"
 #include <iostream>
 #include <ctime>
 
@@ -63,5 +61,4 @@ void Compagnie::displayInfoCompagnie() const {
     std::cout << "Numero de contact : " << numeroContact << std::endl;
     std::cout << "Mail de contact : " << mailContact << std::endl;
     std::cout << "Site web : " << site << std::endl;
-    std::cout << "Aeroport : " << aeroport->getNom() << std::endl;
 }
