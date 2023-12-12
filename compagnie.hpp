@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ctime>
+#include "aeroport.hpp"
 
 class Compagnie {
 private:
@@ -12,11 +13,17 @@ private:
     int numeroContact;
     std::string mailContact;
     std::string site;
+    Aeroport* aeroport; 
 
 public:
     Compagnie(const std::string& nom, int jour, int mois, int annee, const std::string& pays,
-              int numeroContact, const std::string& mailContact,
-              const std::string& site);
+                     int numeroContact, const std::string& mailContact,
+                     const std::string& site,  Aeroport* _aeroport): nom(nom), pays(pays), numeroContact(numeroContact),
+      mailContact(mailContact), site(site), aeroport(_aeroport){
+                        dateCreation.tm_year = annee - 1900;
+                        dateCreation.tm_mon = mois - 1;
+                        dateCreation.tm_mday = jour;
+                        }
 
     std::string getNom() const;
     void setNom(const std::string& nouveauNom);
