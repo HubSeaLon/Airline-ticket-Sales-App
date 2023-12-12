@@ -1,14 +1,15 @@
 #include <iostream>
 #include "vol.hpp"
 
-Vol::Vol(int _idVol, int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, std::string _aeroportDepart, std::string _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee){
-    idVol = _idVol;
+Vol::Vol(int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, std::string _aeroportDepart, std::string _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie){
+    idVol = ++dernierIdVol;
     aeroportDepart = _aeroportDepart;
     aeroportArrivee = _aeroportArrivee;
     nombrePlaces = _nombrePlaces;
     prix = _prix;
     terminalDepart = _terminalDepart;
     terminalArrivee = _terminalArrivee;
+    compagnie = _compagnie;
 
     dateDepart.tm_year = anneeDepart - 1900;
     dateDepart.tm_mon = moisDepart - 1;
@@ -18,9 +19,8 @@ Vol::Vol(int _idVol, int jourDepart, int moisDepart, int anneeDepart, int jourAr
     dateArrivee.tm_mday = jourArrivee;
 }
 
-void Vol::setIdVol(int _idVol){
-    idVol = _idVol;
-}
+int Vol::dernierIdVol = 0;
+
 int Vol::getIdVol() const{
     return idVol;
 }
@@ -90,15 +90,6 @@ int Vol::getTerminalArrivee() const{
     return terminalArrivee;
 }
 
-void Vol::addClient(Client _client){
-    clients.push_back(_client);
-}
-
-void Vol::removeClient(Client _client){
-    clients.erase(std::remove(clients.begin(), clients.end(), _client), clients.end());
-    std::cout<<"suppression effective"<<std::endl;
-}
-
 void Vol::displayInfoVol() const{
     std::cout<<"ID du vol: "<<getIdVol()<<std::endl;
     std::cout<<"Date de depart: "<<getDateDepart()<<std::endl;
@@ -109,8 +100,5 @@ void Vol::displayInfoVol() const{
     std::cout<<"Prix: "<<getPrix()<<std::endl;
     std::cout<<"Terminal de depart: "<<getTerminalDepart()<<std::endl;
     std::cout<<"Terminal d'arrivee: "<<getTerminalArrivee()<<std::endl;
-    std::cout<<"Liste des clients sur le vol: "<<std::endl;
-    for (const auto& client: clients){
-        client.affiche();
-    }
+    std::cout<<"Compagnie: "<<compagnie->getNom()<<std::endl;
 }
