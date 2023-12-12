@@ -29,7 +29,10 @@ int Aeroport::getNombreTerminal() const {
 
 // Méthode d'affichage des informations de l'aéroport
 void Aeroport::displayInfoAeroport() const {
-    std::cout << "Nom de l'aeroport : " << nom << std::endl;
+    std::cout << "-----------------------------------------------------------\n";
+    std::cout << "Nom de l'aeroport     : " << nom << std::endl;
     std::cout << "Adresse de l'aeroport : " << adresse << std::endl;
-    std::cout << "Nombre de terminaux : " << nombreTerminal << std::endl;
+    std::cout << "Nombre de terminaux   : " << nombreTerminal << std::endl;
+    std::cout << "-----------------------------------------------------------\n";
+
 }
