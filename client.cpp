@@ -1,8 +1,8 @@
 #include <iostream>
 #include "client.hpp"
 
-Client::Client(std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
-    numeroClient = ++dernierNumClient;
+Client::Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
+    numeroClient = _numeroClient;
     nom = _nom;
     prenom = _prenom;
     adresse = _adresse;
@@ -14,16 +14,9 @@ Client::Client(std::string _nom, std::string _prenom, int jourNaissance, int moi
     dateNaissance.tm_year = anneeNaissance - 1900;
 }
 
-int Client::dernierNumClient = 0;
-
-Client::~Client(){
-    std::cout<<"destruction du client "<< nom <<std::endl; 
-}
-/*
 void Client::setNumeroClient(int _numeroClient){
     numeroClient = _numeroClient;
 }
-*/
 int Client::getNumeroClient() const{
     return numeroClient;
 }
@@ -86,12 +79,4 @@ void Client::displayInfoClient() const{
 
 void Client::affiche() const{
     std::cout<<getNom()<<" "<<getPrenom()<<std::endl;
-}
-
-bool Client::estEgale(Client _client){
-    return (numeroClient == _client.getNumeroClient());
-}
-
-bool operator==(Client client1, Client client2){
-    return client1.estEgale(client2);
 }
