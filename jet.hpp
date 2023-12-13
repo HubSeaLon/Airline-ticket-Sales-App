@@ -7,7 +7,7 @@
 #include "avion.hpp"
 
 
-class JetPrive : public Avion {
+class JetPrive : public Avion {       // Création sous classe JetPrive qui hérite de Avion
 
     private:
         int nombreSalon;
@@ -16,7 +16,7 @@ class JetPrive : public Avion {
 
     public:
 
-    JetPrive(std::string _nomModele, int _capacite, double _vitesseMoy, 
+    JetPrive(std::string _nomModele, int _capacite, double _vitesseMoy,  // Constructeur JetPrive
                  double _altitudeMoy, double _poids, double _distanceMax,
                  int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie, Vol* _vol,
                  int _nombreSalon, int _nombreBar, int _nombreJacuzzi)   
