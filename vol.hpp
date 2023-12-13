@@ -4,6 +4,7 @@
 #include <string>
 #include <ctime>
 #include "compagnie.hpp"
+#include "aeroport.hpp"
 
 
 class Vol{
@@ -12,8 +13,8 @@ class Vol{
         static int dernierIdVol;
         tm dateDepart;
         tm dateArrivee;
-        std::string aeroportDepart;
-        std::string aeroportArrivee;
+        Aeroport* aeroportDepart;
+        Aeroport* aeroportArrivee;
         int nombrePlaces;
         double prix;
         int terminalDepart;
@@ -21,7 +22,7 @@ class Vol{
         Compagnie* compagnie;
 
     public:
-        Vol(int jourDepart, int moisDepart, int anneeDepart,int jourArrivee, int moisArrivee, int anneeArrivee, std::string _aeroportDepart, std::string _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie);
+        Vol(int jourDepart, int moisDepart, int anneeDepart,int jourArrivee, int moisArrivee, int anneeArrivee, Aeroport* _aeroportDepart, Aeroport* _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie);
 
         int getIdVol() const;  
 
@@ -31,11 +32,11 @@ class Vol{
         void setDateArrivee(int annee, int mois, int jour);
         std::string getDateArrivee() const; 
 
-        void setAeroportDepart(std::string _aeroportDepart);
+        /*void setAeroportDepart(std::string _aeroportDepart);
         std::string getAeroportDepart() const;
 
         void setAeroportArrivee(std::string _aeroportArrivee);
-        std::string getAeroportArrivee() const; 
+        std::string getAeroportArrivee() const;*/
 
         void setNombrePlaces(int _nombrePlaces);
         int getNombrePlaces() const;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "vol.hpp"
 
-Vol::Vol(int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, std::string _aeroportDepart, std::string _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie){
+Vol::Vol(int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, Aeroport* _aeroportDepart, Aeroport* _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie){
     idVol = ++dernierIdVol;
     aeroportDepart = _aeroportDepart;
     aeroportArrivee = _aeroportArrivee;
@@ -47,7 +47,7 @@ std::string Vol::getDateArrivee() const{
     return std::string(buffer);
 }
 
-void Vol::setAeroportDepart(std::string _aeroportDepart){
+/*void Vol::setAeroportDepart(std::string _aeroportDepart){
     aeroportDepart = _aeroportDepart;
 }
 std::string Vol::getAeroportDepart() const{
@@ -59,7 +59,7 @@ void Vol::setAeroportArrivee(std::string _aeroportArrivee){
 }
 std::string Vol::getAeroportArrivee() const{
     return aeroportArrivee;
-}
+}*/
 
 
 void Vol::setNombrePlaces(int _nombrePlaces){
@@ -94,11 +94,40 @@ void Vol::displayInfoVol() const{
     std::cout<<"ID du vol: "<<getIdVol()<<std::endl;
     std::cout<<"Date de depart: "<<getDateDepart()<<std::endl;
     std::cout<<"Date d'arrivee: "<<getDateArrivee()<<std::endl;
-    std::cout<<"Aeroport de depart: "<<getAeroportDepart()<<std::endl;
-    std::cout<<"Aeroport d'arrivee: "<<getAeroportArrivee()<<std::endl;
+    std::cout<<"Aeroport de depart: "<<aeroportDepart->getNom()<<std::endl;
+    std::cout<<"Aeroport d'arrivee: "<<aeroportArrivee->getNom()<<std::endl;
     std::cout<<"Nombre de places: "<<getNombrePlaces()<<std::endl;
     std::cout<<"Prix: "<<getPrix()<<std::endl;
     std::cout<<"Terminal de depart: "<<getTerminalDepart()<<std::endl;
     std::cout<<"Terminal d'arrivee: "<<getTerminalArrivee()<<std::endl;
     std::cout<<"Compagnie: "<<compagnie->getNom()<<std::endl;
 }
+
+/*int main() {
+    
+    Aeroport* aeroportDepart = new Aeroport("Depart Airport", "adresse", 4);
+    Aeroport* aeroportArrivee = new Aeroport("Ariv Airport", "adresse", 4);
+    Compagnie* compagnie = new Compagnie("Air France", 7, 10, 1933, "France", 33141567800LL, "airfrance@gmail.com", "www.airfrance.com");
+
+    
+    Vol vol(2023, 12, 13, 2023, 12, 20, aeroportDepart, aeroportArrivee, 100, 500.0, 1, 2, compagnie);
+
+    
+    vol.displayInfoVol();
+
+    
+    vol.setNombrePlaces(120);
+    vol.setPrix(550.0);
+    vol.setTerminalDepart(3);
+    vol.setTerminalArrivee(4);
+
+    
+    vol.displayInfoVol();
+
+    
+    delete aeroportDepart;
+    delete aeroportArrivee;
+    delete compagnie;
+
+    return 0;
+}*/
