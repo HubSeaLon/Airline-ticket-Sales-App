@@ -23,7 +23,9 @@ class Vol{
 
     public:
         Vol(int jourDepart, int moisDepart, int anneeDepart,int jourArrivee, int moisArrivee, int anneeArrivee, Aeroport* _aeroportDepart, Aeroport* _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie);
-
+        ~Vol(){
+            // Vol sera détruit si l'avion associé au vol est détruit 
+        }
         int getIdVol() const;  
 
         void setDateDepart(int annee, int mois, int jour);

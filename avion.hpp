@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include "compagnie.hpp"
+#include "vol.hpp"
 
 
 
@@ -20,16 +21,17 @@ protected:
     tm dateService;
     std::string pays;
     Compagnie* compagnie;
+    Vol* vol;
 
 
 
 public:
     Avion(std::string _nomModele, int _capacite, double _vitesseMoy, 
           double _altitudeMoy, double _poids, double _distanceMax,
-          int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie)
+          int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie, Vol* _vol)
         : nomModele(_nomModele), capacite(_capacite), vitesseMoy(_vitesseMoy),
           altitudeMoy(_altitudeMoy), poids(_poids), distanceMax(_distanceMax),
-          pays(_pays), compagnie(_compagnie) {
+          pays(_pays), compagnie(_compagnie), vol(_vol) {
 
         dateService.tm_mday = jour;
         dateService.tm_mon = mois - 1;
@@ -84,6 +86,12 @@ public:
                 pays = _pays;
               }       
         }
+
+
+    ~Avion(){
+      // Destruction de l'avion entraine la destruction du vol 
+    } 
+    
 
     void setNomModele(const std::string _nomModele);
     std::string getNomModele() const;
