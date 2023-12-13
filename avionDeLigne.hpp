@@ -8,14 +8,14 @@
 
 
 
-class AvionDeLigne : public Avion {
+class AvionDeLigne : public Avion {        // Création sous classe AvionDeLigne qui hérite de Avion 
 private:
     int placeBusiness;
     int placeEconomie;
     int placeFirstClasse;
 
 public:
-    AvionDeLigne(std::string _nomModele, int _capacite, double _vitesseMoy, 
+    AvionDeLigne(std::string _nomModele, int _capacite, double _vitesseMoy,         // Constructeur AvionDeLigne 
                  double _altitudeMoy, double _poids, double _distanceMax,
                  int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie, Vol* _vol, 
                  int _placeBusiness, int _placeEconomie, int _placeFirstClasse) 
