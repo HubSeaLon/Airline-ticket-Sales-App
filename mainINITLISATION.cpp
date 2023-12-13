@@ -42,5 +42,11 @@ int main(int argc, char const *argv[])
 
     // INITLISATION DES VOLS 
 
+    Vol volParisLondre(18, 04, 2023,18, 04, 2023, &aeroportDeParis, &aeroportDeLondre, 140, 246.58, 5, 4, &AirFrance);
+    Vol volLondreBerlin(20, 04, 2023, 22, 04, 2023, &aeroportDeLondre, &aeroportDeBerlin, 120, 198.75, 3, 2, &Lufthansa);
+    Vol volBerlinParis(24, 04, 2023, 25, 04, 2023, &aeroportDeBerlin, &aeroportDeParis, 160, 305.20, 1, 3, &AirFrance);
+    Vol volParisNewYork(30, 04, 2023, 05, 05, 2023, &aeroportDeParis, &aeroportDeLondre, 200, 560.40, 7, 8, &Emirates);
+    Vol volNewYorkParis(08, 05, 2023, 15, 05, 2023, &aeroportDeLondre, &aeroportDeParis, 180, 495.90, 6, 5, &QatarAirways);
+
     return 0;
 }
