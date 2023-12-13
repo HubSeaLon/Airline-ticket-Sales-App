@@ -4,6 +4,11 @@
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
 
+void menuPrincipal();
+void rubriqueInfo();
+void createAccount();
+void login();
+
 // Fonction pour créer un compte
 void createAccount() {
     std::string username, password, nom, prenom, adresse, numeroTel, mail;
@@ -73,6 +78,76 @@ void createAccount() {
     std::cout << "Compte cree avec succes." << std::endl;
 }
 
+// Fonction pour se connecter
+void login() {
+    std::string username, password;
+
+    std::cout << "Entrez votre nom d'utilisateur : ";
+    std::cin >> username;
+
+    std::cout << "Entrez votre mot de passe : ";
+    std::cin >> password;
+
+    // Charger les comptes existants depuis le fichier texte
+    std::ifstream accountsFileIn(ACCOUNTS_FILE);
+    std::string line;
+    bool informationsDeConnexion = false;
+
+    while (std::getline(accountsFileIn, line)) {
+        if (line.find(username + " " + password) != std::string::npos) {
+            informationsDeConnexion = true;
+            break;
+        }
+    }
+
+    accountsFileIn.close();
+
+    // Vérifier si les informations de connexion sont correctes
+    if (informationsDeConnexion) {
+        std::cout << "Connexion reussie. Bienvenue, " << username << " !" << std::endl;
+        menuPrincipal();
+
+    }
+
+    else {
+        std::cerr << "Erreur : Nom d'utilisateur ou mot de passe incorrect." << std::endl;
+    }
+}
+
+
+//Fonction pour afficher le menu principal
+
+void menuPrincipal(){
+
+        int choice;
+
+        do {
+            std::cout << "Choisissez une option :" << std::endl;
+            std::cout << "1. Consulter des vols" << std::endl;
+            std::cout << "2. Consulter votre compte" << std::endl;
+            std::cout << "3. Afficher rubrique informations" << std::endl;
+            std::cout << "4. Se deconnecter" << std::endl;
+
+            std::cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
+                    break;
+                case 2:
+                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
+                    break;
+                case 3:
+                    rubriqueInfo();
+                    break;
+                case 4:
+                    std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
+                    break;
+                default:
+                    std::cerr << "Option invalide. Veuillez réessayer." << std::endl;
+            }
+        } while (choice != 3);
+}
 
 // Fonction pour afficher rubrique informations 
 
@@ -175,84 +250,25 @@ void rubriqueInfo() {
 
                 if (quitterRubrique == 0) {
                     std::cout << "Retour au menu principal \n";
+                    menuPrincipal();
                     return;
                 } else {
                     while (quitterRubrique != 0) {
                         std::cout << "Veuillez entrer 0 pour quitter \n";
-                        std::cin >> quitterRubrique;    
+                        std::cin >> quitterRubrique;
+                        menuPrincipal();    
                     }
                 }
           
                 break;
             case 0:
                 std::cout << "Retour au menu principal.\n";
+                menuPrincipal();
                 return;
             default:
                 std::cerr << "Option invalide. Veuillez ressayez. \n";
         }
     } while (true);
-}
-
-// Fonction pour se connecter
-void login() {
-    std::string username, password;
-
-    std::cout << "Entrez votre nom d'utilisateur : ";
-    std::cin >> username;
-
-    std::cout << "Entrez votre mot de passe : ";
-    std::cin >> password;
-
-    // Charger les comptes existants depuis le fichier texte
-    std::ifstream accountsFileIn(ACCOUNTS_FILE);
-    std::string line;
-    bool informationsDeConnexion = false;
-
-    while (std::getline(accountsFileIn, line)) {
-        if (line.find(username + " " + password) != std::string::npos) {
-            informationsDeConnexion = true;
-            break;
-        }
-    }
-
-    accountsFileIn.close();
-
-    // Vérifier si les informations de connexion sont correctes
-    if (informationsDeConnexion) {
-        std::cout << "Connexion reussie. Bienvenue, " << username << " !" << std::endl;
-
-        int choice;
-
-        do {
-            std::cout << "Choisissez une option :" << std::endl;
-            std::cout << "1. Consulter des vols" << std::endl;
-            std::cout << "2. Consulter votre compte" << std::endl;
-            std::cout << "3. Afficher rubrique informations" << std::endl;
-            std::cout << "4. Se deconnecter" << std::endl;
-
-            std::cin >> choice;
-
-            switch (choice) {
-                case 1:
-                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
-                    break;
-                case 2:
-                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
-                    break;
-                case 3:
-                    rubriqueInfo();
-                    break;
-                case 4:
-                    std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
-                    break;
-                default:
-                    std::cerr << "Option invalide. Veuillez réessayer." << std::endl;
-            }
-        } while (choice != 3);
-
-    } else {
-        std::cerr << "Erreur : Nom d'utilisateur ou mot de passe incorrect." << std::endl;
-    }
 }
 
 int main() {
