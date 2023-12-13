@@ -4,10 +4,45 @@
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
 
+void menuDebut();
 void menuPrincipal();
 void rubriqueInfo();
 void createAccount();
 void login();
+
+
+void menuDebut() {
+
+    int choice;
+
+    do {
+        std::cout << "Choisissez une option :" << std::endl;
+        std::cout << "                       " << std::endl;
+        std::cout << "1. Se connecter" << std::endl;
+        std::cout << "                       " << std::endl;
+        std::cout << "2. Creer un compte" << std::endl;
+        std::cout << "                       " << std::endl;
+        std::cout << "0. Quitter" << std::endl;
+
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                login();
+                break;
+            case 2:
+                createAccount();            
+                break;
+            case 0:
+                std::cout << "Au revoir !" << std::endl;
+                exit(0);
+            default:
+                std::cerr << "Option invalide. Veuillez reessayer." << std::endl;
+        }
+    } while (choice != 0);
+
+}
+
 
 // Fonction pour créer un compte
 void createAccount() {
@@ -142,6 +177,7 @@ void menuPrincipal(){
                     break;
                 case 4:
                     std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
+                    menuDebut();
                     break;
                 default:
                     std::cerr << "Option invalide. Veuillez réessayer." << std::endl;
@@ -165,7 +201,7 @@ void rubriqueInfo() {
         std::cout << "2. Consulter les differents aeroports \n";
         std::cout << "3. Consulter les differents avions et leurs caracteristiques \n";
         std::cout << "0. Retour menu \n";
-        std::cout << "--------------------------------------------------"; 
+        std::cout << "--------------------------------------------------\n"; 
         
         std::cin >> choice;
 
@@ -188,7 +224,7 @@ void rubriqueInfo() {
 
                 if (quitterRubrique == 0) {
                     std::cout << "Retour au menu principal \n";
-                    return;
+                    break;
                 } else {
                     while (quitterRubrique != 0) {
                         std::cout << "Veuillez entrer 0 pour quitter \n";
@@ -212,7 +248,7 @@ void rubriqueInfo() {
 
                 if (quitterRubrique == 0) {
                     std::cout << "Retour au menu principal \n";
-                    return;
+                    break;
                 } else {
                     while (quitterRubrique != 0) {
                         std::cout << "Veuillez entrer 0 pour quitter \n";
@@ -250,16 +286,13 @@ void rubriqueInfo() {
 
                 if (quitterRubrique == 0) {
                     std::cout << "Retour au menu principal \n";
-                    menuPrincipal();
-                    return;
+                    break;
                 } else {
                     while (quitterRubrique != 0) {
                         std::cout << "Veuillez entrer 0 pour quitter \n";
-                        std::cin >> quitterRubrique;
-                        menuPrincipal();    
+                        std::cin >> quitterRubrique;                   
                     }
-                }
-          
+                }        
                 break;
             case 0:
                 std::cout << "Retour au menu principal.\n";
@@ -272,34 +305,7 @@ void rubriqueInfo() {
 }
 
 int main() {
-    int choice;
-
-    do {
-        std::cout << "Choisissez une option :" << std::endl;
-        std::cout << "                       " << std::endl;
-        std::cout << "1. Se connecter" << std::endl;
-        std::cout << "                       " << std::endl;
-        std::cout << "2. Creer un compte" << std::endl;
-        std::cout << "                       " << std::endl;
-        std::cout << "0. Quitter" << std::endl;
-
-        std::cin >> choice;
-
-        switch (choice) {
-            case 1:
-                login();
-                break;
-            case 2:
-                createAccount();
-                
-                break;
-            case 0:
-                std::cout << "Au revoir !" << std::endl;
-                break;
-            default:
-                std::cerr << "Option invalide. Veuillez reessayer." << std::endl;
-        }
-    } while (choice != 0);
+    menuDebut();
 
     return 0;
 }
