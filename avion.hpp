@@ -9,9 +9,9 @@
 
 
 
-class Avion {
+class Avion {                   // Création classe Avion 
 
-protected:
+protected:                              // Données protégées pour permettres aux sous-classes d'accéder aux attributs Avion
     std::string nomModele; 
     int capacite;
     double vitesseMoy;
@@ -20,24 +20,24 @@ protected:
     double distanceMax;
     tm dateService;
     std::string pays;
-    Compagnie* compagnie;
-    Vol* vol;
+    Compagnie* compagnie;            // Lien avec Compagnie 
+    Vol* vol;                   // Composition avec Vol 
 
 
 
-public:
-    Avion(std::string _nomModele, int _capacite, double _vitesseMoy, 
+public:             
+    Avion(std::string _nomModele, int _capacite, double _vitesseMoy,          // Constructeur 
           double _altitudeMoy, double _poids, double _distanceMax,
           int jour, int mois, int annee, std::string _pays, Compagnie* _compagnie, Vol* _vol)
         : nomModele(_nomModele), capacite(_capacite), vitesseMoy(_vitesseMoy),
           altitudeMoy(_altitudeMoy), poids(_poids), distanceMax(_distanceMax),
           pays(_pays), compagnie(_compagnie), vol(_vol) {
 
-        dateService.tm_mday = jour;
+        dateService.tm_mday = jour;                                   // Date 
         dateService.tm_mon = mois - 1;
         dateService.tm_year = annee - 1900;
 
-        if (_capacite < 0){
+        if (_capacite < 0){                                        // Contrainte des attributs 
                 std::cerr << "Capacite doit etre > 0" << std::endl; 
                 capacite = 0;
               }else{
@@ -91,7 +91,8 @@ public:
     ~Avion(){
       // Destruction de l'avion entraine la destruction du vol 
     } 
-    
+                          
+    // Méthodes getters et setters 
 
     void setNomModele(const std::string _nomModele);
     std::string getNomModele() const;
@@ -117,6 +118,6 @@ public:
     void setPays(const std::string _pays);
     std::string getPays() const;
     
-    virtual void displayInfoAvion() const = 0 ;
+    virtual void displayInfoAvion() const = 0 ;       // méthode virtuelle 
 };
 #endif
