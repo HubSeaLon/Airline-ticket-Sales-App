@@ -1,17 +1,14 @@
 #include <iostream>
 #include "client.hpp"
 
-Client::Client(int _numeroClient, std::string _nom, std::string _prenom, int jourNaissance, int moisNaissance, int anneeNaissance, std::string _adresse, std::string _numeroTel, std::string _mail){
+Client::Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _dateNaissance, std::string _ville, std::string _numeroTel, std::string _mail){
     numeroClient = _numeroClient;
     nom = _nom;
     prenom = _prenom;
-    adresse = _adresse;
+    dateNaissance = _dateNaissance;
+    ville = _ville;
     numeroTel = _numeroTel;
     mail = _mail;
-
-    dateNaissance.tm_mday = jourNaissance;
-    dateNaissance.tm_mon = moisNaissance - 1;
-    dateNaissance.tm_year = anneeNaissance - 1900;
 }
 
 void Client::setNumeroClient(int _numeroClient){
@@ -35,22 +32,18 @@ std::string Client::getPrenom() const{
     return prenom;
 }
 
-void Client::setDateNaissance(int jourNaissance, int moisNaissance, int anneeNaissance){
-    dateNaissance.tm_mday = jourNaissance;
-    dateNaissance.tm_mon = moisNaissance - 1;
-    dateNaissance.tm_year = anneeNaissance - 1900;
+void Client::setDateNaissance(std::string _dateNaissance){
+    dateNaissance = _dateNaissance;
 }
 std::string Client::getDateNaissance() const{
-    char buffer[80];
-    std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &dateNaissance);
-    return std::string(buffer);
+    return dateNaissance;
 }
 
-void Client::setAdresse(std::string _adresse){
-    adresse = _adresse;
+void Client::setVille(std::string _ville){
+    ville = _ville;
 }
-std::string Client::getAdresse() const{
-    return adresse;
+std::string Client::getVille() const{
+    return ville;
 }
 
 void Client::setNumeroTel(std::string _numeroTel){
@@ -72,7 +65,7 @@ void Client::displayInfoClient() const{
     std::cout<<"Nom: "<<getNom()<<std::endl;
     std::cout<<"Prenom: "<<getPrenom()<<std::endl;
     std::cout<<"Date de naissance: "<<getDateNaissance()<<std::endl;
-    std::cout<<"Adresse: "<<getAdresse()<<std::endl;
+    std::cout<<"Ville: "<<getVille()<<std::endl;
     std::cout<<"Numero de telephone: "<<getNumeroTel()<<std::endl;
     std::cout<<"Mail: "<<getMail()<<std::endl;
 }

@@ -46,8 +46,8 @@ void menuDebut() {
 
 // Fonction pour créer un compte
 void createAccount() {
-    std::string username, password, nom, prenom, adresse, numeroTel, mail;
-    int jourN, moisN, anneeN, ID;
+    std::string username, password, nom, prenom, dateNaissance, ville, numeroTel, mail;
+    int ID;
 
     std::cout << "Entrez votre nom d'utilisateur : ";
     std::cin >> username;
@@ -61,17 +61,11 @@ void createAccount() {
     std::cout << "Entrez votre prenom: ";
     std::cin >> prenom;
 
-    std::cout << "Entrez votre jour de naissance: ";
-    std::cin >> jourN;
+    std::cout << "Entrez votre date de naissance: ";
+    std::cin >> dateNaissance;
 
-    std::cout << "Entrez votre mois de naissance: ";
-    std::cin >> moisN;
-
-    std::cout << "Entrez votre annee de naissance: ";
-    std::cin >> anneeN;
-
-    std::cout << "Entrez votre adresse: ";
-    std::cin >> adresse;
+    std::cout << "Entrez votre ville: ";
+    std::cin >> ville;
 
     std::cout << "Entrez votre numero de telephone: ";
     std::cin >> numeroTel;
@@ -105,7 +99,7 @@ void createAccount() {
 
     // Ajouter le nouveau compte
     std::ofstream accountsFileOut(ACCOUNTS_FILE, std::ios::app);
-    accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << jourN << " " << moisN << " " << anneeN << " " << adresse << " " << numeroTel << " " << mail <<std::endl;
+    accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << dateNaissance << " " << ville << " " << numeroTel << " " << mail <<std::endl;
     accountsFileOut.close();
 
     //ici?  Client client(ID,nom,prenom,jourN,moisN,anneeN,adresse,numeroTel,mail);
