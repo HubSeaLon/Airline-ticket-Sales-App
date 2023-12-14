@@ -1,7 +1,5 @@
 #include <iostream>
 #include "vol.hpp"
-#include "aeroport.cpp"
-#include "compagnie.cpp"
 
 Vol::Vol(int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, Aeroport* _aeroportDepart, Aeroport* _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie){
     idVol = ++dernierIdVol;
