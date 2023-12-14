@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
 
@@ -9,6 +10,7 @@ void menuPrincipal();
 void rubriqueInfo();
 void createAccount();
 void login();
+void infoVol();
 
 
 void menuDebut() {
@@ -161,7 +163,7 @@ void menuPrincipal(){
 
             switch (choice) {
                 case 1:
-                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
+                    infoVol();
                     break;
                 case 2:
                     std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
@@ -297,6 +299,59 @@ void rubriqueInfo() {
         }
     } while (true);
 }
+
+void infoVol() {
+    int choice;
+    int quitterRubrique;
+    do {
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "--------------------------------------------------\n";
+        std::cout << "-----------------------VOLS-----------------------\n";
+        std::cout << "\n";
+        std::cout << "Choisissez une option : \n";
+        std::cout << "1. Afficher les vols \n";
+        std::cout << "0. Quitter \n";
+        std::cout << "--------------------------------------------------\n"; 
+        
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                std::cout << "\n";
+                std::cout << "\n";
+                std::cout << "--------------------------------------------------\n";
+                std::cout << "--------------------LISTE VOLS--------------------\n";
+                std::cout << "\n";
+                //volParisLondre.displayInfoVol();
+                //volLondreBerlin.displayInfoVol();
+
+                std::cout << "0. Pour quitter \n";
+                std::cin >> quitterRubrique;
+
+                if (quitterRubrique == 0) {
+                    std::cout << "Retour au menu principal \n";
+                    break;
+                } else {
+                    while (quitterRubrique != 0) {
+                        std::cout << "Veuillez entrer 0 pour quitter \n";
+                        std::cin >> quitterRubrique;    
+                    }
+                }
+                break;
+            case 0:
+                std::cout << "Quitter la rubrique informations.\n";
+                return;
+            default:
+                std::cerr << "Option invalide. Veuillez ressayez. \n";
+        }
+    } while (true);
+}
+
+
+
+
+
 
 int main() {
     menuDebut();
