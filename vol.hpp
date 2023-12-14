@@ -3,6 +3,8 @@
 
 #include <string>
 #include <ctime>
+#include <vector>
+#include <algorithm>
 #include "compagnie.hpp"
 #include "aeroport.hpp"
 
@@ -28,8 +30,14 @@ class Vol{
         }
         int getIdVol() const;  
 
+        friend bool compareVols(const Vol& vol1, const Vol& vol2);
+
+        friend void afficherVolsTries(const std::vector<Vol>& vols);
+
         void setDateDepart(int annee, int mois, int jour);
         std::string getDateDepart() const; 
+
+        tm getDateDepart1() const;
 
         void setDateArrivee(int annee, int mois, int jour);
         std::string getDateArrivee() const; 

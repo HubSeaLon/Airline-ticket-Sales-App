@@ -1,5 +1,7 @@
 #include <iostream>
 #include "vol.hpp"
+#include "aeroport.cpp"
+#include "compagnie.cpp"
 
 Vol::Vol(int jourDepart, int moisDepart, int anneeDepart, int jourArrivee, int moisArrivee, int anneeArrivee, Aeroport* _aeroportDepart, Aeroport* _aeroportArrivee, int _nombrePlaces, double _prix, int _terminalDepart, int _terminalArrivee, Compagnie* _compagnie){
     idVol = ++dernierIdVol;
@@ -34,6 +36,10 @@ std::string Vol::getDateDepart() const{
     char buffer[80];
     std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &dateDepart);
     return std::string(buffer);
+}
+
+tm Vol::getDateDepart1() const{
+    return dateDepart;
 }
 
 void Vol::setDateArrivee(int annee, int mois, int jour){
@@ -103,31 +109,66 @@ void Vol::displayInfoVol() const{
     std::cout<<"Compagnie: "<<compagnie->getNom()<<std::endl;
 }
 
-/*int main() {
-    
-    Aeroport* aeroportDepart = new Aeroport("Depart Airport", "adresse", 4);
-    Aeroport* aeroportArrivee = new Aeroport("Ariv Airport", "adresse", 4);
-    Compagnie* compagnie = new Compagnie("Air France", 7, 10, 1933, "France", 33141567800LL, "airfrance@gmail.com", "www.airfrance.com");
 
-    
-    Vol vol(2023, 12, 13, 2023, 12, 20, aeroportDepart, aeroportArrivee, 100, 500.0, 1, 2, compagnie);
+bool compareVols(const Vol& vol1, const Vol& vol2) {
+    if (vol1.getDateDepart1().tm_year == vol2.getDateDepart1().tm_year) {
+        if (vol1.getDateDepart1().tm_mon == vol2.getDateDepart1().tm_mon) {
+            return vol1.getDateDepart1().tm_mday < vol2.getDateDepart1().tm_mday;
+        }
+        return vol1.getDateDepart1().tm_mon < vol2.getDateDepart1().tm_mon;
+    }
+    return vol1.getDateDepart1().tm_year < vol2.getDateDepart1().tm_year;
+}
 
-    
-    vol.displayInfoVol();
 
-    
-    vol.setNombrePlaces(120);
-    vol.setPrix(550.0);
-    vol.setTerminalDepart(3);
-    vol.setTerminalArrivee(4);
+void afficherVolsTries(const std::vector<Vol>& vols) {
+    // Copier le vecteur de vols pour ne pas modifier l'ordre original
+    std::vector<Vol> volsCopie = vols;
 
-    
-    vol.displayInfoVol();
+    // Trier les vols en utilisant la fonction de comparaison
+    std::sort(volsCopie.begin(), volsCopie.end(), compareVols);
 
-    
-    delete aeroportDepart;
-    delete aeroportArrivee;
-    delete compagnie;
+    // Afficher les vols triés
+    for (std::vector<Vol>::const_iterator it = volsCopie.begin(); it != volsCopie.end(); ++it) {
+        it->displayInfoVol();
+        std::cout << "------------------------" << std::endl;
+    }
+}
+
+/*
+int main() {
+    // Create Aeroports
+    Aeroport* aeroportDepart1 = new Aeroport("Depart Airport 1", "adresse1", 4);
+    Aeroport* aeroportArrivee1 = new Aeroport("Arrival Airport 1", "adresse2", 4);
+
+    Aeroport* aeroportDepart2 = new Aeroport("Depart Airport 2", "adresse3", 4);
+    Aeroport* aeroportArrivee2 = new Aeroport("Arrival Airport 2", "adresse4", 4);
+
+    // Create Compagnies
+    Compagnie* compagnie1 = new Compagnie("Air France", 7, 10, 1933, "France", 33141567800LL, "airfrance@gmail.com", "www.airfrance.com");
+    Compagnie* compagnie2 = new Compagnie("Lufthansa", 6, 4, 1955, "Germany", 491711470, "lufthansa@gmail.com", "www.lufthansa.com");
+
+    // Create a vector of Vol objects
+    std::vector<Vol> vols;
+
+    // Add flights to the vector
+    vols.push_back(Vol(13, 12, 2023, 20, 12, 2023, aeroportDepart1, aeroportArrivee1, 100, 500.0, 1, 2, compagnie1));
+    vols.push_back(Vol(15, 12, 2023, 22, 12, 2023, aeroportDepart2, aeroportArrivee2, 120, 600.0, 3, 4, compagnie2));
+
+    // Display sorted information about the flights
+    afficherVolsTries(vols);
+
+    // Clean up dynamically allocated memory
+    delete aeroportDepart1;
+    delete aeroportArrivee1;
+    delete compagnie1;
+
+    delete aeroportDepart2;
+    delete aeroportArrivee2;
+    delete compagnie2;
 
     return 0;
 }*/
+
+
+
