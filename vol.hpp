@@ -30,9 +30,9 @@ class Vol{
         }
         int getIdVol() const;  
 
-        friend bool compareVols(const Vol& vol1, const Vol& vol2);
+        
 
-        friend void afficherVolsTries(const std::vector<Vol>& vols);
+        
 
         void setDateDepart(int annee, int mois, int jour);
         std::string getDateDepart() const; 
@@ -62,4 +62,8 @@ class Vol{
 
         void displayInfoVol() const;
 };
+
+bool compareVols(const Vol& vol1, const Vol& vol2);
+
+void afficherVolsTries(const std::vector<Vol>& vols);
 #endif
