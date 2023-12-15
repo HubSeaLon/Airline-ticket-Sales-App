@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
+#include <sstream> 
+#include <stdlib.h>
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
 
@@ -30,10 +32,12 @@ void menuDebut() {
 
         switch (choice) {
             case 1:
+                system("cls");
                 login();
                 break;
             case 2:
-                createAccount();            
+                system("cls");
+                createAccount();
                 break;
             case 0:
                 std::cout << "Au revoir !" << std::endl;
@@ -104,8 +108,6 @@ void createAccount() {
     accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << dateNaissance << " " << ville << " " << numeroTel << " " << mail <<std::endl;
     accountsFileOut.close();
 
-    //ici?  Client client(ID,nom,prenom,jourN,moisN,anneeN,adresse,numeroTel,mail);
-
     std::cout << "Compte cree avec succes." << std::endl;
 }
 
@@ -127,6 +129,11 @@ void login() {
     while (std::getline(accountsFileIn, line)) {
         if (line.find(username + " " + password) != std::string::npos) {
             informationsDeConnexion = true;
+            int IdClient;
+            std::string nom, prenom, dateNaissance, ville, numeroTel, mail;
+            std::istringstream recuperer(line);          
+            recuperer >> username >> password >> IdClient >> nom >> prenom >> dateNaissance >> ville >> numeroTel >> mail;
+            //Client client(IdClient,nom,prenom,dateNaissance,ville,numeroTel,mail);
             break;
         }
     }
@@ -135,6 +142,7 @@ void login() {
 
     // Vérifier si les informations de connexion sont correctes
     if (informationsDeConnexion) {
+        system("cls");
         std::cout << "Connexion reussie. Bienvenue, " << username << " !" << std::endl;
         menuPrincipal();
 
@@ -163,15 +171,20 @@ void menuPrincipal(){
 
             switch (choice) {
                 case 1:
+                    system("cls");
                     infoVol();
                     break;
                 case 2:
+                    system("cls");
+                    //client.displayInfoClient();
                     std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
                     break;
                 case 3:
+                    system("cls");
                     rubriqueInfo();
                     break;
                 case 4:
+                    system("cls");
                     std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
                     menuDebut();
                     break;
