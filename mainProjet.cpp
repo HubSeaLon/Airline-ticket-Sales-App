@@ -4,9 +4,16 @@
 #include <stdlib.h>
 #include <sstream> 
 #include <stdlib.h>
-//#include "client.cpp"
+#include "client.cpp"
+#include "vol.cpp"
+#include "aeroport.cpp"
+#include "compagnie.cpp"
+#include "avionDeLigne.cpp"
+#include "jet.cpp"
+#include "Avion.cpp"
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
+const std::string TICKETS_FILE = "tickets.txt";
 
 void menuDebut();
 void menuPrincipal();
@@ -14,8 +21,42 @@ void rubriqueInfo();
 void createAccount();
 void login();
 void infoVol();
+void acheterBillet(Vol& vol);
 
-//Client client;
+
+Client client;
+Aeroport aeroportDeParis("Aeroport International de Paris", "144 rue de chennviere", 3 );
+Aeroport aeroportDeLondre("Aeroport International de Londre", "54 avenue of Boston", 2);
+Compagnie AirFrance("Air France", 7, 10, 1933, "France", 33141567800LL, "airfrance@gmail.com", "www.airfrance.com");  
+Vol volParisLondre(18, 04, 2023,18, 04, 2023, &aeroportDeParis, &aeroportDeLondre, 140, 246.58, 5, 4, &AirFrance);
+ 
+
+
+void acheterBillet(int a, Vol& vol) {
+    std::ifstream ticketsFileIn(TICKETS_FILE);
+    std::string line;
+    bool ticketBooked = false;
+    int count = 0;
+        while ( std::getline(ticketsFileIn, line)) {
+            std::istringstream pm(line);
+            std::string premierMot;
+            pm >> premierMot;
+            if ( premierMot == std::to_string(a) ){
+                ++count;
+            }
+            if (line.find(std::to_string(vol.getIdVol()) + " " + std::to_string(client.getNumeroClient())) != std::string::npos){
+                ticketBooked = true;
+            }
+        }
+        if (ticketBooked){
+            std::cerr << "Erreur: billet déjà réservé sur votre compte. Si vous souhaitez réserver ce vol pour une autre personne, créer ou connecter un compte à son nom." << std::endl;
+        } else {
+            std::ofstream ticketsFileOut(TICKETS_FILE, std::ios::app);
+            ticketsFileOut << vol.getIdVol() << " " << client.getNumeroClient() << "  " << std::to_string(count) << "  " << "Economie" << "  " << std::to_string(count) << std::endl;
+            ticketsFileOut.close();
+            std::cout << "Billet reserve!" << std::endl;
+        }
+}
 
 
 void menuDebut() {
@@ -108,7 +149,7 @@ void createAccount() {
 
     // Ajouter le nouveau compte
     std::ofstream accountsFileOut(ACCOUNTS_FILE, std::ios::app);
-    accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << dateNaissance << " " << ville << " " << numeroTel << " " << mail <<std::endl;
+    accountsFileOut << username << " " << password << " " << ID << " " << nom << " " << prenom << " " << dateNaissance << " " << ville << " " << numeroTel << " " << mail << std::endl;
     accountsFileOut.close();
 
     std::cout << "Compte cree avec succes." << std::endl;
@@ -136,7 +177,7 @@ void login() {
             std::string nom, prenom, dateNaissance, ville, numeroTel, mail;
             std::istringstream recuperer(line);          
             recuperer >> username >> password >> IdClient >> nom >> prenom >> dateNaissance >> ville >> numeroTel >> mail;
-            //client = Client(IdClient,nom,prenom,dateNaissance,ville,numeroTel,mail);
+            client = Client(IdClient,nom,prenom,dateNaissance,ville,numeroTel,mail);
             break;
         }
     }
@@ -162,7 +203,7 @@ void login() {
 void menuPrincipal(){
 
         int choice;
-
+        system("cls");
         do {
             std::cout << "Choisissez une option :" << std::endl;
             std::cout << "1. Consulter des vols" << std::endl;
@@ -174,19 +215,22 @@ void menuPrincipal(){
 
             switch (choice) {
                 case 1:
-                    system("cls");
                     infoVol();
                     break;
                 case 2:
                     system("cls");
-                    //client.displayInfoClient();
+                    client.displayInfoClient();
+/*
+                    std::ifstream ticketsFileIn(TICKETS_FILE);
+                    std::string line;
+                    while ( std::getline(ticketsFileIn, line)) {
+
+                    }*/
                     break;
                 case 3:
-                    system("cls");
                     rubriqueInfo();
                     break;
                 case 4:
-                    system("cls");
                     std::cout << "Deconnexion reussie. Retour a la page d'accueil." << std::endl;
                     menuDebut();
                     break;
@@ -199,11 +243,10 @@ void menuPrincipal(){
 // Fonction pour afficher rubrique informations 
 
 void rubriqueInfo() {
+    system("cls");
     int choice;
     int quitterRubrique;
     do {
-        std::cout << "\n";
-        std::cout << "\n";
         std::cout << "--------------------------------------------------\n";
         std::cout << "--------------RUBRIQUE INFORMATIONS---------------\n";
         std::cout << "\n";
@@ -219,8 +262,7 @@ void rubriqueInfo() {
 
         switch (choice) {
             case 1:
-                std::cout << "\n";
-                std::cout << "\n";
+                system("cls");
                 std::cout << "--------------------------------------------------\n";
                 std::cout << "-----------LISTE COMPAGNIES AERIENNES-------------\n";
                 std::cout << "\n";
@@ -245,8 +287,7 @@ void rubriqueInfo() {
                 break;
 
             case 2:
-                std::cout << "\n";
-                std::cout << "\n";
+                system("cls");
                 std::cout << "--------------------------------------------------\n";
                 std::cout << "-----------------LISTE AEROPORTS------------------\n";
                 std::cout << "\n";
@@ -270,8 +311,7 @@ void rubriqueInfo() {
 
 
             case 3:
-                std::cout << "\n";
-                std::cout << "\n";
+                system("cls");
                 std::cout << "--------------------------------------------------\n";
                 std::cout << "------------------LISTES AVIONS-------------------\n";
                 std::cout << "\n";
@@ -316,11 +356,10 @@ void rubriqueInfo() {
 }
 
 void infoVol() {
+    system("cls");
     int choice;
     int quitterRubrique;
     do {
-        std::cout << "\n";
-        std::cout << "\n";
         std::cout << "--------------------------------------------------\n";
         std::cout << "-----------------------VOLS-----------------------\n";
         std::cout << "\n";
@@ -333,20 +372,35 @@ void infoVol() {
 
         switch (choice) {
             case 1:
-                std::cout << "\n";
-                std::cout << "\n";
+                system("cls");
                 std::cout << "--------------------------------------------------\n";
                 std::cout << "--------------------LISTE VOLS--------------------\n";
                 std::cout << "\n";
-                //volParisLondre.displayInfoVol();
+                volParisLondre.displayInfoVol();
                 //volLondreBerlin.displayInfoVol();
-
-                std::cout << "0. Pour quitter \n";
+                std::cout << "0. Pour quitter \n ";
                 std::cin >> quitterRubrique;
 
                 if (quitterRubrique == 0) {
+                    system("cls");
                     std::cout << "Retour au menu principal \n";
                     break;
+                } else if (( quitterRubrique > 0 ) and ( quitterRubrique < 6 )) {
+                    if ( quitterRubrique == 1 ){
+                        acheterBillet(1, volParisLondre);
+                    }
+                    if ( quitterRubrique == 2 ){
+                        //acheterBillet(2, volLondreBerlin);
+                    }
+                    if ( quitterRubrique == 3 ){
+                        //acheterBillet(3, volBerlinParis);
+                    }
+                    if ( quitterRubrique == 4 ){
+                        //acheterBillet(4, volParisNewYork);
+                    }
+                    if ( quitterRubrique == 5 ){
+                        //acheterBillet(5, volNewYorkParis);
+                    }
                 } else {
                     while (quitterRubrique != 0) {
                         std::cout << "Veuillez entrer 0 pour quitter \n";
@@ -368,7 +422,7 @@ void infoVol() {
 
 
 
-int main() {
+int main() { 
     menuDebut();
 
     return 0;
