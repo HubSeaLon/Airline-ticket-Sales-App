@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <sstream> 
 #include <stdlib.h>
+//#include "client.cpp"
 
 const std::string ACCOUNTS_FILE = "accounts.txt";
 
@@ -13,6 +14,8 @@ void rubriqueInfo();
 void createAccount();
 void login();
 void infoVol();
+
+//Client client;
 
 
 void menuDebut() {
@@ -133,7 +136,7 @@ void login() {
             std::string nom, prenom, dateNaissance, ville, numeroTel, mail;
             std::istringstream recuperer(line);          
             recuperer >> username >> password >> IdClient >> nom >> prenom >> dateNaissance >> ville >> numeroTel >> mail;
-            //Client client(IdClient,nom,prenom,dateNaissance,ville,numeroTel,mail);
+            //client = Client(IdClient,nom,prenom,dateNaissance,ville,numeroTel,mail);
             break;
         }
     }
@@ -177,7 +180,6 @@ void menuPrincipal(){
                 case 2:
                     system("cls");
                     //client.displayInfoClient();
-                    std::cout << "Fonctionnalite non implementee pour l'instant." << std::endl;
                     break;
                 case 3:
                     system("cls");

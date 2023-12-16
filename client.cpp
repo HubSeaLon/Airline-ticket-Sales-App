@@ -1,6 +1,10 @@
 #include <iostream>
 #include "client.hpp"
 
+Client::Client(){
+
+}
+
 Client::Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _dateNaissance, std::string _ville, std::string _numeroTel, std::string _mail){
     numeroClient = _numeroClient;
     nom = _nom;
@@ -61,13 +65,17 @@ std::string Client::getMail() const{
 }
 
 void Client::displayInfoClient() const{
-    std::cout<<"Numero client: "<<getNumeroClient()<<std::endl;
-    std::cout<<"Nom: "<<getNom()<<std::endl;
-    std::cout<<"Prenom: "<<getPrenom()<<std::endl;
-    std::cout<<"Date de naissance: "<<getDateNaissance()<<std::endl;
-    std::cout<<"Ville: "<<getVille()<<std::endl;
-    std::cout<<"Numero de telephone: "<<getNumeroTel()<<std::endl;
-    std::cout<<"Mail: "<<getMail()<<std::endl;
+    std::cout << "-------------------------------------------------\n";
+    std::cout << "Numero client          : "<<getNumeroClient()<<std::endl;
+    std::cout << "Nom                    : "<<getNom()<<std::endl;
+    std::cout << "Prenom                 : "<<getPrenom()<<std::endl;
+    std::cout << "Date de naissance      : "<<getDateNaissance()<<std::endl;
+    std::cout << "Ville                  : "<<getVille()<<std::endl;
+    std::cout << "Numero de telephone    : "<<getNumeroTel()<<std::endl;
+    std::cout << "Mail                   : "<<getMail()<<std::endl;
+    std::cout << "-------------------------------------------------\n";
+    std::cout << "\n";
+    std::cout << "\n";
 }
 
 std::string Client::affiche() const{
