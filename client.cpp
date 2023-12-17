@@ -75,7 +75,3 @@ void Client::displayInfoClient() const{
     std::cout << "\n";
     std::cout << "\n";
 }
-
-std::string Client::affiche() const{
-    std::cout << "Client                   : "<<getNom()<<" "<<getPrenom()<<std::endl;
-}

@@ -256,12 +256,13 @@ void infoCompte(){
                 break;
             case 2:
                 //system("cls");
-
                 while ( std::getline(ticketFileIn, lines)) {
                     std::istringstream billets(lines);
                     billets >> IDVol >> IDClient >> NumeroBil >> Classe >> Siege;
-                    if ( IDClient == client.getNumeroClient()){
-                        switch (IDVol){
+                    std::string sc = std::to_string(client.getNumeroClient());
+
+                    if (lines.substr(2, sc.length()) == sc) {
+                        switch (IDVol) {
                             case 1:
                                 billet = Billet(NumeroBil, Classe, Siege, &volParisLondres, &client);
                                 billet.displayInfoBillet();
@@ -273,7 +274,7 @@ void infoCompte(){
                             case 3:
                                 billet = Billet(NumeroBil, Classe, Siege, &volBerlinParis, &client);
                                 billet.displayInfoBillet();
-                                break;    
+                                break;
                             case 4:
                                 billet = Billet(NumeroBil, Classe, Siege, &volParisNewYork, &client);
                                 billet.displayInfoBillet();
@@ -282,9 +283,23 @@ void infoCompte(){
                                 billet = Billet(NumeroBil, Classe, Siege, &volNewYorkParis, &client);
                                 billet.displayInfoBillet();
                                 break;
+                            /*case 1:
+                                std::cout << "vol 1 client " << sc <<std::endl;
+                                break;
+                            case 2:
+                                std::cout << "vol 2 client " << sc <<std::endl;
+                                break;
+                            case 3:
+                                std::cout << "vol 3 client " << sc <<std::endl;
+                                break;
+                            case 4:
+                                std::cout << "vol 4 client " << sc <<std::endl;
+                                break;
+                            case 5:
+                                std::cout << "vol 5 client " << sc <<std::endl;
+                                break;*/
                             default:
-                                IDVol = 0;
-                                std::cout << "Pas de billets reserves sur ce compte.";
+                                return;
                         }
                     }
                 }

@@ -39,7 +39,5 @@ class Client{
         std::string getMail() const;
 
         void displayInfoClient() const;
-
-        std::string affiche() const;
 };
 #endif
