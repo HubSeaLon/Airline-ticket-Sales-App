@@ -1,9 +1,7 @@
 #include <iostream>
 #include "client.hpp"
 
-Client::Client(){
-
-}
+Client::Client(){}
 
 Client::Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _dateNaissance, std::string _ville, std::string _numeroTel, std::string _mail){
     numeroClient = _numeroClient;
@@ -79,5 +77,5 @@ void Client::displayInfoClient() const{
 }
 
 std::string Client::affiche() const{
-    std::cout<<"Client: "<<getNom()<<" "<<getPrenom()<<std::endl;
+    std::cout << "Client                   : "<<getNom()<<" "<<getPrenom()<<std::endl;
 }

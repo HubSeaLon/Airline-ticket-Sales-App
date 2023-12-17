@@ -64,6 +64,7 @@ void Compagnie::setSite(const std::string& nouveauSite) {
 }
 
 void Compagnie::displayInfoCompagnie() const {
+    std::cout << "\n";
     std::cout << "-----------------------------------\n";
     std::cout << "Nom de la compagnie : " << nom << std::endl;
     std::cout << "Date de creation    : " << Compagnie::getdateCreation() << std::endl;

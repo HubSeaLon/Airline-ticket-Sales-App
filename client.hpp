@@ -14,6 +14,7 @@ class Client{
         std::string mail;
 
     public:
+        Client();
         Client(int _numeroClient, std::string _nom, std::string _prenom, std::string _dateNaissance, std::string _ville, std::string _numeroTel, std::string _mail);
 
         void setNumeroClient(int _numeroClient);

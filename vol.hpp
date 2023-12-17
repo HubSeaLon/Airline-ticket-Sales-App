@@ -42,11 +42,9 @@ class Vol{
         void setDateArrivee(int annee, int mois, int jour);
         std::string getDateArrivee() const; 
 
-        /*void setAeroportDepart(std::string _aeroportDepart);
         std::string getAeroportDepart() const;
 
-        void setAeroportArrivee(std::string _aeroportArrivee);
-        std::string getAeroportArrivee() const;*/
+        std::string getAeroportArrivee() const;
 
         void setNombrePlaces(int _nombrePlaces);
         int getNombrePlaces() const;

@@ -12,6 +12,7 @@ class Billet{
         Client* client;
     
     public:
+        Billet();
         Billet(int _numeroBillet, std::string _typeClasse, int _siegePassager, Vol* _vol, Client* _client);
 
         void setNumeroBillet(int _numeroBillet);

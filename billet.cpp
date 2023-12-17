@@ -3,6 +3,8 @@
 #include "client.hpp"
 #include "vol.hpp"  
 
+Billet::Billet(){}
+
 Billet::Billet(int _numeroBillet, std::string _typeClasse, int _siegePassager, Vol* _vol, Client* _client){
     numeroBillet = _numeroBillet;
     typeClasse = _typeClasse;
@@ -33,9 +35,13 @@ int Billet::getSiegePassager() const{
 }
 
 void Billet::displayInfoBillet() const{
-    std::cout<<"Numero du billet: "<<getNumeroBillet()<<std::endl;
-    std::cout<<"Classe: "<<getTypClasse()<<std::endl;
-    std::cout<<"Siege: "<<getSiegePassager()<<std::endl;
-    std::cout<<"Voyage de "<<vol->getAeroportDepart()<<" a "<<vol->getAeroportArrivee()<<std::endl;
-    std::cout<<client->affiche()<<std::endl;
+    std::cout << "----------------------------------------------------------------\n";
+    std::cout << "Numero du billet         : "<<getNumeroBillet()<<std::endl;
+    std::cout << "Classe                   : "<<getTypClasse()<<std::endl;
+    std::cout << "Siege                    : "<<getSiegePassager()<<std::endl;
+    std::cout << "Aeroport de depart       : "<<vol->getAeroportDepart()<<std::endl;
+    std::cout << "Aeroport d'arrivee       : "<<vol->getAeroportArrivee()<<std::endl;
+    std::cout << client->affiche()<<std::endl;
+    std::cout << "----------------------------------------------------------------\n";
+    std::cout << "\n";
 }

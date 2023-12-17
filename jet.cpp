@@ -40,6 +40,7 @@ int JetPrive::getNombreJacuzzi() const{
 }
 
 void JetPrive::displayInfoAvion() const{
+    std::cout << "\n";
     std::cout << "-------------------------------------------------\n";
     std::cout << "Nom modele         : " << nomModele << std::endl;
     std::cout << "Capacite           : " << capacite << std::endl;
@@ -54,6 +55,5 @@ void JetPrive::displayInfoAvion() const{
     std::cout << "Pays               : " << pays << std::endl;
     std::cout << "Compagnie aerienne : " << compagnie->getNom() << std::endl;
     std::cout << "-------------------------------------------------\n";
-    std::cout << "\n";
     std::cout << "\n";
 }

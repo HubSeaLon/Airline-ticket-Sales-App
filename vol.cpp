@@ -53,20 +53,13 @@ std::string Vol::getDateArrivee() const{
     return std::string(buffer);
 }
 
-/*void Vol::setAeroportDepart(std::string _aeroportDepart){
-    aeroportDepart = _aeroportDepart;
-}
-std::string Vol::getAeroportDepart() const{
-    return aeroportDepart;
+std::string Vol::getAeroportDepart() const {
+    return aeroportDepart->getNom();
 }
 
-void Vol::setAeroportArrivee(std::string _aeroportArrivee){
-    aeroportArrivee = _aeroportArrivee;
+std::string Vol::getAeroportArrivee() const {
+    return aeroportArrivee->getNom();
 }
-std::string Vol::getAeroportArrivee() const{
-    return aeroportArrivee;
-}*/
-
 
 void Vol::setNombrePlaces(int _nombrePlaces){
     nombrePlaces = _nombrePlaces;
@@ -97,16 +90,20 @@ int Vol::getTerminalArrivee() const{
 }
 
 void Vol::displayInfoVol() const{
-    std::cout<<"ID du vol: "<<getIdVol()<<std::endl;
-    std::cout<<"Date de depart: "<<getDateDepart()<<std::endl;
-    std::cout<<"Date d'arrivee: "<<getDateArrivee()<<std::endl;
-    std::cout<<"Aeroport de depart: "<<aeroportDepart->getNom()<<std::endl;
-    std::cout<<"Aeroport d'arrivee: "<<aeroportArrivee->getNom()<<std::endl;
-    std::cout<<"Nombre de places: "<<getNombrePlaces()<<std::endl;
-    std::cout<<"Prix: "<<getPrix()<<std::endl;
-    std::cout<<"Terminal de depart: "<<getTerminalDepart()<<std::endl;
-    std::cout<<"Terminal d'arrivee: "<<getTerminalArrivee()<<std::endl;
-    std::cout<<"Compagnie: "<<compagnie->getNom()<<std::endl;
+    std::cout << "-------------------------------------------------\n";
+    std::cout << "ID du vol                : "<<getIdVol()<<std::endl;
+    std::cout << "Date de depart           : "<<getDateDepart()<<std::endl;
+    std::cout << "Date d'arrivee           : "<<getDateArrivee()<<std::endl;
+    std::cout << "Aeroport de depart       : "<<aeroportDepart->getNom()<<std::endl;
+    std::cout << "Aeroport d'arrivee       : "<<aeroportArrivee->getNom()<<std::endl;
+    std::cout << "Nombre de places         : "<<getNombrePlaces()<<std::endl;
+    std::cout << "Prix                     : "<<getPrix()<<std::endl;
+    std::cout << "Terminal de depart       : "<<getTerminalDepart()<<std::endl;
+    std::cout << "Terminal d'arrivee       : "<<getTerminalArrivee()<<std::endl;
+    std::cout << "Compagnie                : "<<compagnie->getNom()<<std::endl;
+    std::cout << "-------------------------------------------------\n";
+    std::cout << "\n";
+    std::cout << "\n";
 }
 
 
