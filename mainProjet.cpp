@@ -1,8 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <stdlib.h>
-#include <sstream> 
+#include <stdlib.h> // Bibliothèque permettant de "clear" l'invité de commandes
+#include <sstream>  // Bibliothèque permettant d'attribuer à des variables les n ièmes premiers mots d'uine ligne 
+
+// Implémentation des classes
 #include "client.cpp"
 #include "vol.cpp"
 #include "aeroport.cpp"
@@ -26,6 +28,7 @@ void acheterBillet(Vol& vol);
 
 // Initialisation d'un objet Client
 Client client;
+
 // Initialisation d'un objet Billet
 Billet billet;
 
@@ -63,6 +66,7 @@ void menuDebut() {
     int choice;
 
     do {
+        system("cls");
         std::cout << "Choisissez une option :" << std::endl;
         std::cout << "                       " << std::endl;
         std::cout << "1. Se connecter" << std::endl;
@@ -361,17 +365,17 @@ void acheterBillet(int a, Vol& vol) {
             if ( premierMot == std::to_string(a) ){
                 ++count;
             }
-            // Vérification si l'utilisateur n'a pas déjà acheté le billet
             if (line.find(std::to_string(vol.getIdVol()) + " " + std::to_string(client.getNumeroClient())) != std::string::npos){
                 ticketBooked = true;
             }
         }
-        if (ticketBooked){
-            std::cerr << "Erreur: billet déjà réservé sur votre compte. Si vous souhaitez réserver ce vol pour une autre personne, créer ou connecter un compte à son nom." << std::endl;
+        // Vérification si l'utilisateur n'a pas déjà acheté le billet ou si des places sont encore disponibles dans le vol
+        if ((ticketBooked) or ( count > vol.getNombrePlaces() )){
+            std::cerr << "Erreur: billet deja reserve sur votre compte. Si vous souhaitez reserver ce vol pour une autre personne, creer ou connecter un compte a son nom." << std::endl;
         } else {
             // Ajout de la réservation du client pour le vol choisi dans le fichier
             std::ofstream ticketsFileOut(TICKETS_FILE, std::ios::app);
-            ticketsFileOut << vol.getIdVol() << " " << client.getNumeroClient() << "  " << count << "  " << "Economie" << "  " << count << std::endl;
+            ticketsFileOut << vol.getIdVol() << " " << client.getNumeroClient() << "  " << count << "  " << "Premiere classe" << "  " << count << std::endl;
             ticketsFileOut.close();
             std::cout << "Billet reserve!" << std::endl;
         }
@@ -449,6 +453,7 @@ void infoVol() {
         }
     } while (true);
 }
+
 
 // Fonction pour afficher les différentes informations de l'utilisateur
 
