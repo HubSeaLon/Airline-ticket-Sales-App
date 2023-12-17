@@ -35,13 +35,13 @@ int Billet::getSiegePassager() const{
 }
 
 void Billet::displayInfoBillet() const{
-    std::cout << "----------------------------------------------------------------\n";
+    std::cout << "-------------------------------------------------------------------\n";
     std::cout << "Numero du billet         : "<<getNumeroBillet()<<std::endl;
     std::cout << "Classe                   : "<<getTypClasse()<<std::endl;
     std::cout << "Siege                    : "<<getSiegePassager()<<std::endl;
     std::cout << "Aeroport de depart       : "<<vol->getAeroportDepart()<<std::endl;
     std::cout << "Aeroport d'arrivee       : "<<vol->getAeroportArrivee()<<std::endl;
     std::cout << "Client                   : "<<client->getNom()<<" "<<client->getPrenom()<<std::endl;
-    std::cout << "----------------------------------------------------------------\n";
+    std::cout << "-------------------------------------------------------------------\n";
     std::cout << "\n";
 }

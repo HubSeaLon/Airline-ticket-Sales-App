@@ -58,37 +58,6 @@ JetPrive Jet1("Gulfstream G650", 19, 956, 15545, 24.5, 12964, 01,01,2012, "Etats
 JetPrive Jet2("Bombardier Global 7500", 19, 930, 15545, 24.5, 14264, 01,01,2018, "Canada", &AirFrance, &volBerlinParis, 1,2,1);
  
 
-// Fonction permettant à l'utilisateur de réserver un billet
-void acheterBillet(int a, Vol& vol) {
-    std::ifstream ticketsFileIn(TICKETS_FILE);
-    std::string line;
-    bool ticketBooked = false;
-    int count = 1;
-        while ( std::getline(ticketsFileIn, line)) {
-            std::istringstream pm(line);
-            std::string premierMot;
-            pm >> premierMot;
-            // "if" comptant le nombre de billets déjà réservés afin d'attribuer un numero de billet et un siege à l'utilisateur
-            if ( premierMot == std::to_string(a) ){
-                ++count;
-            }
-            // Vérification si l'utilisateur n'a pas déjà acheté le billet
-            if (line.find(std::to_string(vol.getIdVol()) + " " + std::to_string(client.getNumeroClient())) != std::string::npos){
-                ticketBooked = true;
-            }
-        }
-        if (ticketBooked){
-            std::cerr << "Erreur: billet déjà réservé sur votre compte. Si vous souhaitez réserver ce vol pour une autre personne, créer ou connecter un compte à son nom." << std::endl;
-        } else {
-            // Ajout de la réservation du client pour le vol choisi dans le fichier
-            std::ofstream ticketsFileOut(TICKETS_FILE, std::ios::app);
-            ticketsFileOut << vol.getIdVol() << " " << client.getNumeroClient() << "  " << count << "  " << "Economie" << "  " << count << std::endl;
-            ticketsFileOut.close();
-            std::cout << "Billet reserve!" << std::endl;
-        }
-}
-
-
 void menuDebut() {
 
     int choice;
@@ -230,90 +199,6 @@ void login() {
     }
 }
 
-void infoCompte(){
-
-    int IDVol, IDClient, NumeroBil, Siege, choixC;
-    std::string Classe;
-    do {
-        std::ifstream ticketFileIn(TICKETS_FILE);
-        std::string lines;
-        //system("cls");
-        std::cout << "--------------------------------------------------\n";
-        std::cout << "----------------------COMPTE----------------------\n";
-        std::cout << "\n";
-        std::cout << "Choisissez une option : \n";
-        std::cout << "1. Afficher vos informations personelles \n";
-        std::cout << "2. Afficher vos bilets reserves \n";
-        std::cout << "0. Quitter \n";
-        std::cout << "--------------------------------------------------\n";
-
-        std::cin >> choixC;
-
-        switch (choixC) {
-            case 1:
-                //system("cls");
-                client.displayInfoClient();
-                break;
-            case 2:
-                //system("cls");
-                while ( std::getline(ticketFileIn, lines)) {
-                    std::istringstream billets(lines);
-                    billets >> IDVol >> IDClient >> NumeroBil >> Classe >> Siege;
-                    std::string sc = std::to_string(client.getNumeroClient());
-
-                    if (lines.substr(2, sc.length()) == sc) {
-                        switch (IDVol) {
-                            case 1:
-                                billet = Billet(NumeroBil, Classe, Siege, &volParisLondres, &client);
-                                billet.displayInfoBillet();
-                                break;
-                            case 2:
-                                billet = Billet(NumeroBil, Classe, Siege, &volLondresBerlin, &client);
-                                billet.displayInfoBillet();
-                                break;
-                            case 3:
-                                billet = Billet(NumeroBil, Classe, Siege, &volBerlinParis, &client);
-                                billet.displayInfoBillet();
-                                break;
-                            case 4:
-                                billet = Billet(NumeroBil, Classe, Siege, &volParisNewYork, &client);
-                                billet.displayInfoBillet();
-                                break;
-                            case 5:
-                                billet = Billet(NumeroBil, Classe, Siege, &volNewYorkParis, &client);
-                                billet.displayInfoBillet();
-                                break;
-                            /*case 1:
-                                std::cout << "vol 1 client " << sc <<std::endl;
-                                break;
-                            case 2:
-                                std::cout << "vol 2 client " << sc <<std::endl;
-                                break;
-                            case 3:
-                                std::cout << "vol 3 client " << sc <<std::endl;
-                                break;
-                            case 4:
-                                std::cout << "vol 4 client " << sc <<std::endl;
-                                break;
-                            case 5:
-                                std::cout << "vol 5 client " << sc <<std::endl;
-                                break;*/
-                            default:
-                                return;
-                        }
-                    }
-                }
-                break;
-            case 0:
-                std::cout << "Quitter la rubrique informations.\n";
-                return;
-            default:
-                std::cerr << "Option invalide. Veuillez ressayez. \n";
-        }
-
-    } while (true);
-}
-
 //Fonction pour afficher le menu principal
 
 void menuPrincipal(){
@@ -357,15 +242,15 @@ void rubriqueInfo() {
     int quitterRubrique;
     do {
         system("cls");
-        std::cout << "--------------------------------------------------\n";
-        std::cout << "--------------RUBRIQUE INFORMATIONS---------------\n";
+        std::cout << "-------------------------------------------------------------\n";
+        std::cout << "--------------------RUBRIQUE INFORMATIONS--------------------\n";
         std::cout << "\n";
         std::cout << "Choisissez une option : \n";
         std::cout << "1. Consulter les differentes compagnies aeriennes \n";
         std::cout << "2. Consulter les differents aeroports \n";
         std::cout << "3. Consulter les differents avions et leurs caracteristiques \n";
         std::cout << "0. Retour menu \n";
-        std::cout << "--------------------------------------------------\n"; 
+        std::cout << "-------------------------------------------------------------\n"; 
         
         std::cin >> choice;
 
@@ -460,6 +345,38 @@ void rubriqueInfo() {
     } while (true);
 }
 
+// Fonction permettant à l'utilisateur de réserver un billet
+
+
+void acheterBillet(int a, Vol& vol) {
+    std::ifstream ticketsFileIn(TICKETS_FILE);
+    std::string line;
+    bool ticketBooked = false;
+    int count = 1;
+        while ( std::getline(ticketsFileIn, line)) {
+            std::istringstream pm(line);
+            std::string premierMot;
+            pm >> premierMot;
+            // "if" comptant le nombre de billets déjà réservés afin d'attribuer un numero de billet et un siege à l'utilisateur
+            if ( premierMot == std::to_string(a) ){
+                ++count;
+            }
+            // Vérification si l'utilisateur n'a pas déjà acheté le billet
+            if (line.find(std::to_string(vol.getIdVol()) + " " + std::to_string(client.getNumeroClient())) != std::string::npos){
+                ticketBooked = true;
+            }
+        }
+        if (ticketBooked){
+            std::cerr << "Erreur: billet déjà réservé sur votre compte. Si vous souhaitez réserver ce vol pour une autre personne, créer ou connecter un compte à son nom." << std::endl;
+        } else {
+            // Ajout de la réservation du client pour le vol choisi dans le fichier
+            std::ofstream ticketsFileOut(TICKETS_FILE, std::ios::app);
+            ticketsFileOut << vol.getIdVol() << " " << client.getNumeroClient() << "  " << count << "  " << "Economie" << "  " << count << std::endl;
+            ticketsFileOut.close();
+            std::cout << "Billet reserve!" << std::endl;
+        }
+}
+
 void infoVol() {
     int choice;
     int quitterRubrique;
@@ -488,7 +405,7 @@ void infoVol() {
                 volNewYorkParis.displayInfoVol();
                 std::cout << "\n";
                 std::cout << "Choisissez une option : \n";
-                std::cout << "0. Pour quitter  \n ";
+                std::cout << " 0. Pour quitter  \n ";
                 std::cout << "1. Pour reserver le vol Paris-Londres \n ";
                 std::cout << "2. Pour reserver le vol Londres-Berlin \n ";
                 std::cout << "3. Pour reserver le vol Berlin-Paris \n ";
@@ -533,6 +450,78 @@ void infoVol() {
     } while (true);
 }
 
+// Fonction pour afficher les différentes informations de l'utilisateur
+
+void infoCompte(){
+
+    int IDVol, IDClient, NumeroBil, Siege, choixC;
+    std::string Classe;
+    do {
+        std::ifstream ticketFileIn(TICKETS_FILE);
+        std::string lines;
+        //system("cls");
+        std::cout << "--------------------------------------------------\n";
+        std::cout << "----------------------COMPTE----------------------\n";
+        std::cout << "\n";
+        std::cout << "Choisissez une option : \n";
+        std::cout << "1. Afficher vos informations personelles \n";
+        std::cout << "2. Afficher vos bilets reserves \n";
+        std::cout << "0. Quitter \n";
+        std::cout << "--------------------------------------------------\n";
+
+        std::cin >> choixC;
+
+        switch (choixC) {
+            case 1:
+                // Affichage des donnees personelles du client
+                system("cls");
+                client.displayInfoClient();
+                break;
+            case 2:
+                system("cls");
+                // Revue de toutes les lignes du document tickets.txt pour vérifier si le client a réservé un ou plusieurs vols et ainsi les afficher si oui
+                while ( std::getline(ticketFileIn, lines)) {
+                    std::istringstream billets(lines);
+                    billets >> IDVol >> IDClient >> NumeroBil >> Classe >> Siege;
+                    std::string sc = std::to_string(client.getNumeroClient());
+
+                    if (lines.substr(2, sc.length()) == sc) {
+                        switch (IDVol) {
+                            case 1:
+                                billet = Billet(NumeroBil, Classe, Siege, &volParisLondres, &client);
+                                billet.displayInfoBillet();
+                                break;
+                            case 2:
+                                billet = Billet(NumeroBil, Classe, Siege, &volLondresBerlin, &client);
+                                billet.displayInfoBillet();
+                                break;
+                            case 3:
+                                billet = Billet(NumeroBil, Classe, Siege, &volBerlinParis, &client);
+                                billet.displayInfoBillet();
+                                break;
+                            case 4:
+                                billet = Billet(NumeroBil, Classe, Siege, &volParisNewYork, &client);
+                                billet.displayInfoBillet();
+                                break;
+                            case 5:
+                                billet = Billet(NumeroBil, Classe, Siege, &volNewYorkParis, &client);
+                                billet.displayInfoBillet();
+                                break;
+                            default:
+                                return;
+                        }
+                    }
+                }
+                break;
+            case 0:
+                std::cout << "Quitter la rubrique informations.\n";
+                return;
+            default:
+                std::cerr << "Option invalide. Veuillez ressayez. \n";
+        }
+
+    } while (true);
+}
 
 
 

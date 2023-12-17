@@ -90,7 +90,7 @@ int Vol::getTerminalArrivee() const{
 }
 
 void Vol::displayInfoVol() const{
-    std::cout << "-------------------------------------------------\n";
+    std::cout << "-------------------------------------------------------------------\n";
     std::cout << "ID du vol                : "<<getIdVol()<<std::endl;
     std::cout << "Date de depart           : "<<getDateDepart()<<std::endl;
     std::cout << "Date d'arrivee           : "<<getDateArrivee()<<std::endl;
@@ -101,7 +101,7 @@ void Vol::displayInfoVol() const{
     std::cout << "Terminal de depart       : "<<getTerminalDepart()<<std::endl;
     std::cout << "Terminal d'arrivee       : "<<getTerminalArrivee()<<std::endl;
     std::cout << "Compagnie                : "<<compagnie->getNom()<<std::endl;
-    std::cout << "-------------------------------------------------\n";
+    std::cout << "-------------------------------------------------------------------\n";
     std::cout << "\n";
     std::cout << "\n";
 }
